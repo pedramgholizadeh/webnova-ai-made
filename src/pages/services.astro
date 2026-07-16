@@ -1,76 +1,51 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ServiceCard from '../components/ServiceCard.astro';
 import Button from '../components/Button.astro';
-import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/translations';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const services = [
-  {
-    title: "Brand Strategy & Identity",
-    description: "We help ambitious brands define who they are and how they show up in the world — across cultures and channels.",
-    icon: "◐",
-    details: "Brand audits • Positioning • Naming • Visual identity systems • Brand architecture • Guidelines & playbooks"
-  },
-  {
-    title: "Digital Design & UX",
-    description: "World-class digital experiences. We design interfaces that feel inevitable and delightful to use.",
-    icon: "◈",
-    details: "User research • Interface design • Design systems • Prototyping • Accessibility • Design operations"
-  },
-  {
-    title: "Websites & Digital Products",
-    description: "Fast, beautiful, and conversion-focused websites and products that work as hard as your team.",
-    icon: "▣",
-    details: "Custom development • Webflow & custom CMS • E-commerce • Web applications • Performance optimization"
-  },
-  {
-    title: "Creative Campaigns",
-    description: "Integrated campaigns that cut through the noise and create lasting cultural impact.",
-    icon: "✧",
-    details: "Campaign strategy • Creative direction • Content systems • 360° activations • Measurement frameworks"
-  },
-  {
-    title: "Motion Design & 3D",
-    description: "Bringing brands to life through motion, film and spatial experiences.",
-    icon: "◉",
-    details: "Motion systems • 3D & CGI • Brand films • Interactive installations • Product visualization"
-  },
-  {
-    title: "Creative Consulting",
-    description: "Strategic guidance for in-house teams and leadership on design, brand and digital transformation.",
-    icon: "◎",
-    details: "Brand & design audits • Creative leadership support • Team workshops • Capability building"
-  }
-];
+import { aiServices } from '../data/ai-services';
 ---
 
-<Layout title="Services" description="Full-spectrum creative services: Brand Strategy, Digital Design, Websites, Campaigns, Motion and Creative Consulting.">
-  <div class="max-w-6xl mx-auto px-6 pt-16 pb-24">
-    <div class="max-w-2xl mb-14">
-      <h1 class="text-6xl font-semibold tracking-[-1.8px] mb-4">{t('services.title')}</h1>
-      <p class="text-2xl text-zinc-400">{t('services.subtitle')}</p>
+<Layout 
+  title="خدمات هوش مصنوعی | وب‌نوا" 
+  description="طراحی لندینگ پیج، سایت، اپلیکیشن، استوری اینستاگرام، آواتار AI، اینفلوئنسر مجازی و اتوماسیون با هوش مصنوعی"
+>
+  <div class="max-w-6xl mx-auto px-6 pt-16 pb-20">
+    <!-- Header -->
+    <div class="max-w-3xl mb-14">
+      <div class="text-[#3b82f6] tracking-[2px] text-sm mb-3">AI-POWERED SERVICES</div>
+      <h1 class="text-6xl font-semibold tracking-[-1.8px] mb-4">خدمات هوش مصنوعی ما</h1>
+      <p class="text-2xl text-zinc-400">
+        از طراحی تا اجرا — همه چیز با ترکیب خلاقیت انسانی و قدرت هوش مصنوعی
+      </p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6">
-      {services.map((service, index) => (
-        <div class="card p-9 rounded-3xl flex flex-col">
-          <div class="text-4xl mb-8 text-[#3b82f6]">{service.icon}</div>
-          <h3 class="text-3xl font-semibold tracking-tight mb-4">{service.title}</h3>
-          <p class="text-lg text-zinc-400 mb-6 flex-grow">{service.description}</p>
-          
-          <div class="text-sm text-zinc-400 border-t border-zinc-800 pt-6 mt-auto">
-            {service.details}
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {aiServices.map(service => (
+        <a 
+          href={`/services/${service.slug}`} 
+          class="group card p-8 rounded-3xl flex flex-col hover:border-[#3b82f6] transition-colors"
+        >
+          <div class="flex-1">
+            <h3 class="text-2xl font-semibold tracking-tight mb-4 group-hover:text-[#3b82f6] transition-colors">
+              {service.title}
+            </h3>
+            <p class="text-zinc-400 text-[15px] leading-relaxed mb-6">
+              {service.heroSubtitle}
+            </p>
           </div>
-        </div>
+
+          <div class="flex items-center justify-between pt-6 border-t border-zinc-800 text-sm font-medium">
+            <span class="text-[#3b82f6]">مشاهده جزئیات و قیمت →</span>
+            <span class="text-zinc-500 group-hover:text-white transition-colors">از {service.pricing[0].price} تومان</span>
+          </div>
+        </a>
       ))}
     </div>
 
-    <div class="mt-16 text-center">
-      <Button href={getLocalizedPath('/contact', lang)} variant="primary" size="lg">
-        {t('services.cta')}
+    <div class="mt-16 text-center border-t border-zinc-800 pt-12">
+      <p class="text-lg text-zinc-400 mb-6">نمی‌دانید کدام سرویس برای شما مناسب است؟</p>
+      <Button href="/contact" variant="primary" size="lg">
+        مشاوره رایگان بگیرید
       </Button>
     </div>
   </div>
