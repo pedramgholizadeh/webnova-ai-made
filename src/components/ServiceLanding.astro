@@ -222,19 +222,27 @@ const { service } = Astro.props;
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
 
-      // TODO: Replace with your real Cloudflare Worker URL
-      const WORKER_URL = 'https://your-worker.yourdomain.workers.dev/lead';
+      // === Cloudflare Worker Integration ===
+      // 1. Deploy workers/lead-handler.js to Cloudflare Workers
+      // 2. Create a KV namespace called "LEADS" and bind it
+      // 3. Replace the URL below with your deployed worker URL
+      const WORKER_URL = 'https://webnova-leads.your-subdomain.workers.dev';
 
       try {
-        // For now we simulate + log (you can later connect real worker)
-        console.log('Lead Data:', data);
+        console.log('Submitting lead for service:', data.service);
 
-        // Example real call (uncomment when worker is ready):
-        // await fetch(WORKER_URL, {
+        // Simulate for now (remove this line when real worker is ready)
+        await new Promise(resolve => setTimeout(resolve, 800));
+
+        // Real submission (uncomment after deploying worker):
+        // const res = await fetch(WORKER_URL, {
         //   method: 'POST',
         //   headers: { 'Content-Type': 'application/json' },
         //   body: JSON.stringify(data)
         // });
+        // if (!res.ok) throw new Error('Worker error');
+
+        console.log('Lead submitted successfully:', data);
 
         form.style.display = 'none';
         if (successDiv) successDiv.classList.remove('hidden');
