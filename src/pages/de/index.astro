@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Button from '../../components/Button.astro';
 import { getAllServices } from '../../data/ai-services';
+import { getLocalizedPath } from '../../i18n/translations';
 
 const lang = 'de';
 const services = getAllServices(lang).slice(0, 6);
@@ -20,8 +20,8 @@ const services = getAllServices(lang).slice(0, 6);
       </p>
 
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="/de/services" class="btn btn-primary px-9 py-4 text-base">Services entdecken</a>
-        <a href="/de/contact" class="btn btn-secondary px-9 py-4 text-base">Beratung buchen</a>
+        <a href={getLocalizedPath('/services', lang)} class="btn btn-primary px-9 py-4 text-base">Services entdecken</a>
+        <a href={getLocalizedPath('/contact', lang)} class="btn btn-secondary px-9 py-4 text-base">Beratung buchen</a>
       </div>
     </div>
   </section>
@@ -32,13 +32,13 @@ const services = getAllServices(lang).slice(0, 6);
         <div class="text-[#3b82f6] text-sm tracking-[2px] mb-2">WAS WIR ANBIETEN</div>
         <h2 class="text-4xl font-semibold tracking-tight">KI-gestützte Services</h2>
       </div>
-      <a href="/de/services" class="hidden md:block text-sm text-[#3b82f6]">Alle Services →</a>
+      <a href={getLocalizedPath('/services', lang)} class="hidden md:block text-sm text-[#3b82f6]">Alle Services →</a>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map(service => (
-        <a href={`/de/services/${service.slug}`} class="group border border-zinc-800 p-8 rounded-3xl hover:border-[#3b82f6] transition-all">
-          <span class="material-symbols-outlined text-3xl mb-6 text-[#3b82f6]">{service.icon}</span>
+        <a href={getLocalizedPath(`/services/${service.slug}`, lang)} class="group border border-zinc-800 p-8 rounded-3xl hover:border-[#3b82f6] transition-all">
+          <div class="text-3xl mb-6">{service.icon}</div>
           <h3 class="font-semibold text-xl mb-3 group-hover:text-[#3b82f6]">{service.title}</h3>
           <p class="text-zinc-400 text-[15px] leading-relaxed line-clamp-3">{service.heroSubtitle}</p>
         </a>
@@ -76,7 +76,7 @@ const services = getAllServices(lang).slice(0, 6);
   <section class="py-20 text-center">
     <div class="max-w-xl mx-auto px-6">
       <h2 class="text-4xl font-semibold tracking-tight mb-6">Bereit für etwas Außergewöhnliches?</h2>
-      <a href="/de/contact" class="btn btn-primary px-10 py-4 text-lg">Gespräch starten</a>
+      <a href={getLocalizedPath('/contact', lang)} class="btn btn-primary px-10 py-4 text-lg">Gespräch starten</a>
     </div>
   </section>
 </Layout>

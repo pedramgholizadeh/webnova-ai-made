@@ -7,6 +7,9 @@ export type Lang = keyof typeof languages;
 
 export const defaultLang: Lang = 'en';
 
+// Base path for GitHub Pages (e.g. '/webnova-ai-made' or '')
+const BASE = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+
 export const ui = {
   en: {
     // Navigation
@@ -113,8 +116,7 @@ export const ui = {
     'team.sofia.name': 'Sofia Laurent',
     'team.sofia.role': 'Design Director',
     'team.sofia.bio': 'Award-winning designer with a passion for systems thinking and digital craftsmanship.',
-    'team.julian.name': 'Julian Keller',
-    'team.julian.role': 'Technical Director',
+    'team.julian.name': 'Technical Director',
     'team.julian.bio': 'Bridges design and engineering. Previously led digital product teams at a major European tech company.',
 
     // Values
@@ -241,26 +243,46 @@ export const ui = {
 } as const;
 
 export function getLangFromUrl(url: URL): Lang {
-  const [, lang] = url.pathname.split('/');
-  if (lang === 'de') return 'de';
+  let pathname = url.pathname;
+
+  // Strip base if present
+  if (BASE && pathname.startsWith(BASE)) {
+    pathname = pathname.slice(BASE.length) || '/';
+  }
+
+  const segments = pathname.split('/').filter(Boolean);
+  const first = segments[0];
+  if (first === 'de') return 'de';
   return defaultLang;
 }
 
 export function useTranslations(lang: Lang) {
   return function t(key: keyof typeof ui[typeof defaultLang]): string {
-    // @ts-ignore - runtime safety for initial setup
+    // @ts-ignore
     return ui[lang][key] || ui[defaultLang][key] || key;
   };
 }
 
 export function getLocalizedPath(path: string, lang: Lang): string {
-  if (lang === defaultLang) {
-    return path;
-  }
   // Ensure path starts with /
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  if (cleanPath === '/') {
-    return '/de';
+  let cleanPath = path.startsWith('/') ? path : `/${path}`;
+
+  let localizedPath: string;
+
+  if (lang === defaultLang) {
+    localizedPath = cleanPath;
+  } else {
+    if (cleanPath === '/') {
+      localizedPath = '/de';
+    } else {
+      localizedPath = `/de${cleanPath}`;
+    }
   }
-  return `/de${cleanPath}`;
+
+  // Prepend base if set and not already present
+  if (BASE && BASE !== '/' && !localizedPath.startsWith(BASE)) {
+    localizedPath = BASE + localizedPath;
+  }
+
+  return localizedPath;
 }

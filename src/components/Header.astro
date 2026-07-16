@@ -21,27 +21,33 @@ const navItems = [
 ];
 
 const isActive = (href: string) => {
-  if (href === '/') {
-    return currentPath === '/' || currentPath === '/de';
-  }
   const localized = getLocalizedPath(href, lang);
+  if (href === '/') {
+    const homeEn = getLocalizedPath('/', 'en');
+    const homeDe = getLocalizedPath('/', 'de');
+    return currentPath === homeEn || currentPath === homeDe || currentPath === '/';
+  }
   return currentPath === localized || currentPath.startsWith(localized + '/');
 };
 
 const switchLang = lang === 'en' ? 'de' : 'en';
 const switchLabel = lang === 'en' ? 'DE' : 'EN';
-const switchHref = currentPath.startsWith('/de') ? currentPath.replace('/de', '') || '/' : currentPath;
+
+// Improved language switcher that respects base
+const currentWithoutLang = currentPath.replace(/^\/de/, '') || '/';
 const targetPath = switchLang === 'de' 
-  ? `/de${switchHref === '/' ? '' : switchHref}` 
-  : switchHref;
+  ? getLocalizedPath(currentWithoutLang, 'de')
+  : getLocalizedPath(currentWithoutLang, 'en');
 
 const ctaText = t('nav.getInTouch');
+
+const logoHref = getLocalizedPath('/', lang);
 ---
 
 <header class="sticky top-0 z-50 border-b border-zinc-800 bg-[#0a0a0b]/95 backdrop-blur-lg">
   <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
     <!-- Logo -->
-    <a href={lang === 'de' ? '/de' : '/'} class="flex items-center gap-2 group">
+    <a href={logoHref} class="flex items-center gap-2 group">
       <div class="w-8 h-8 bg-[#3b82f6] rounded flex items-center justify-center">
         <span class="text-white font-bold text-xl tracking-tighter">W</span>
       </div>
@@ -75,7 +81,7 @@ const ctaText = t('nav.getInTouch');
                       href={getLocalizedPath(`/services/${service.slug}`, lang)}
                       class="flex items-start gap-3 p-3 rounded-xl hover:bg-zinc-900 transition-colors group/item"
                     >
-                      <span class="material-symbols-outlined text-2xl mt-0.5">{service.icon}</span>
+                      <div class="text-2xl mt-0.5"><span class="material-symbols-outlined">{service.icon}</span></div>
                       <div class="flex-1 min-w-0">
                         <div class="font-medium text-white group-hover/item:text-[#3b82f6] transition-colors">{service.title}</div>
                         <div class="text-xs text-zinc-400 line-clamp-2 mt-1">{service.heroSubtitle}</div>
