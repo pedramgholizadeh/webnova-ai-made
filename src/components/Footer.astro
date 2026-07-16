@@ -55,7 +55,7 @@ const footerLinks = [
           {services.slice(0, 6).map(service => (
             <li>
               <a href={getLocalizedPath(`/services/${service.slug}`, lang)} class="text-zinc-400 hover:text-white flex items-center gap-2">
-                <span>{service.icon}</span>
+                <span class="material-symbols-outlined text-base">{service.icon}</span>
                 <span class="truncate">{service.title}</span>
               </a>
             </li>

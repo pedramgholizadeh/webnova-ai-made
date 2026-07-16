@@ -32,7 +32,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "ai-landing-page",
     title: "AI Landing Page Design",
-    icon: "🚀",
+    icon: "rocket_launch",
     heroTitle: "Landing Pages Powered by AI That Actually Convert",
     heroSubtitle: "Get a high-converting, professional landing page designed with AI in as little as 72 hours.",
     problem: "Most businesses have weak landing pages that waste ad spend and fail to convert visitors into customers. Manual design is expensive and slow.",
@@ -60,7 +60,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "ai-website",
     title: "AI Website Design",
-    icon: "🌐",
+    icon: "language",
     heroTitle: "Modern Websites Built with AI",
     heroSubtitle: "Fast, beautiful, and intelligent websites designed and optimized with the help of AI.",
     problem: "Traditional websites are slow to build, expensive to maintain, and often become outdated quickly.",
@@ -87,7 +87,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "mobile-app-design",
     title: "Android & iOS App Design",
-    icon: "📱",
+    icon: "smartphone",
     heroTitle: "Mobile Apps Users Actually Love",
     heroSubtitle: "Beautiful, high-performance apps for Android and iOS with exceptional user experience.",
     problem: "Many apps suffer from poor UX, bugs, low retention, and fail to engage users after the first use.",
@@ -114,7 +114,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "web-app",
     title: "Web Application Design",
-    icon: "💻",
+    icon: "computer",
     heroTitle: "Powerful Custom Web Applications",
     heroSubtitle: "Internal tools, SaaS platforms, and complex web apps built for real business needs.",
     problem: "Companies still rely on spreadsheets or expensive, inflexible legacy software.",
@@ -141,7 +141,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "ai-instagram-story",
     title: "AI Instagram Story Design",
-    icon: "📸",
+    icon: "photo_camera",
     heroTitle: "Instagram Stories That Stop the Scroll",
     heroSubtitle: "Daily professional, high-engagement Instagram Stories created with AI assistance.",
     problem: "Creating consistent daily stories is time-consuming and most brands post low-quality, repetitive content.",
@@ -168,7 +168,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "ai-instagram-post",
     title: "AI Instagram Carousel Design",
-    icon: "🖼️",
+    icon: "collections",
     heroTitle: "Carousel Posts That Hold Attention",
     heroSubtitle: "High-performing multi-slide Instagram posts with powerful storytelling.",
     problem: "Single-image posts no longer perform well as users scroll past them quickly.",
@@ -195,7 +195,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "ai-avatar",
     title: "AI Avatar Creation",
-    icon: "👤",
+    icon: "person",
     heroTitle: "Realistic AI Avatars That Speak for Your Brand",
     heroSubtitle: "Professional AI avatars that can present, explain, and sell 24/7.",
     problem: "Founders and experts spend too much time recording videos and creating repetitive content.",
@@ -222,7 +222,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "ai-influencer",
     title: "AI Influencer Creation",
-    icon: "⭐",
+    icon: "star",
     heroTitle: "Your Own Fully Controlled AI Influencer",
     heroSubtitle: "Virtual influencers 100% dedicated to your brand that work around the clock.",
     problem: "Working with real influencers is expensive, unpredictable, and carries brand risk.",
@@ -249,7 +249,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "social-media-analytics",
     title: "Social Media Analysis",
-    icon: "📊",
+    icon: "insights",
     heroTitle: "Data That Drives Real Growth",
     heroSubtitle: "Deep analysis and actionable insights for your social media performance.",
     problem: "Brands create content but have no clear idea what actually works and why.",
@@ -276,7 +276,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "ad-campaign",
     title: "Advertising Campaign & Execution",
-    icon: "📢",
+    icon: "campaign",
     heroTitle: "Advertising That Delivers Real ROI",
     heroSubtitle: "Strategy, creative development, and execution for Instagram, Google, and LinkedIn.",
     problem: "Many companies spend heavily on ads but see very poor or negative return on investment.",
@@ -303,7 +303,7 @@ const englishServices: ServiceData[] = [
   {
     slug: "ai-automation",
     title: "AI Business Automation",
-    icon: "⚙️",
+    icon: "settings",
     heroTitle: "Automate Your Business with AI",
     heroSubtitle: "Smart automations that eliminate repetitive work and multiply productivity.",
     problem: "Teams waste countless hours on repetitive tasks like replying, posting, and reporting.",
