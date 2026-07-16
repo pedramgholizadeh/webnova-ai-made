@@ -19,10 +19,9 @@ const t = useTranslations(lang);
       <div class="lg:col-span-3">
         <form 
           id="contact-form"
-          action="https://formspree.io/f/your-form-id" 
-          method="POST"
           class="space-y-6"
         >
+          <input type="hidden" name="service" value="contact-page" />
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm text-zinc-400 mb-2" for="name">{t('contact.form.name')}</label>
@@ -61,6 +60,7 @@ const t = useTranslations(lang);
           </div>
           
           <p id="form-success" class="hidden text-sm text-[#22c55e] pt-2">{t('contact.form.success')}</p>
+          <p id="form-error" class="hidden text-sm text-[#ef4444] pt-2">{t('contact.form.error')}</p>
         </form>
       </div>
 
@@ -93,21 +93,40 @@ const t = useTranslations(lang);
   </div>
 
   <script>
-    // Simple form handling for demo (replace with real Formspree / Netlify)
-    const form = document.getElementById('contact-form');
+    const form = document.getElementById('contact-form') as HTMLFormElement;
     const successMsg = document.getElementById('form-success');
+    const errorMsg = document.getElementById('form-error');
 
     if (form) {
-      form.addEventListener('submit', (e) => {
-        // For now, prevent real submit and show success (demo)
-        // Remove this in production when using real endpoint
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        form.style.display = 'none';
-        if (successMsg) successMsg.classList.remove('hidden');
-        
-        // In real use, remove the preventDefault and let the form post
-        // Or use fetch to submit to Formspree.
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        const WORKER_URL = 'https://webnova-leads.webiro-ir.workers.dev/lead';
+
+        const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+
+        try {
+          const response = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+
+          if (response.ok) {
+            form.style.display = 'none';
+            if (successMsg) successMsg.classList.remove('hidden');
+            if (errorMsg) errorMsg.classList.add('hidden');
+          } else {
+            throw new Error('Submission failed');
+          }
+        } catch (err) {
+          if (errorMsg) errorMsg.classList.remove('hidden');
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Message'; }
+        }
       });
     }
   </script>

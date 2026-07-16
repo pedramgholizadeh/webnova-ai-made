@@ -159,15 +159,3 @@ const logoHref = getLocalizedPath('/', lang);
     </div>
   </div>
 </header>
-
-<script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  
-  if (btn && menu) {
-    btn.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('hidden');
-      btn.setAttribute('aria-expanded', (!isOpen).toString());
-    });
-  }
-</script>
