@@ -4,11 +4,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://webnova.example.com', // Update to your domain or GitHub Pages URL
-  // For GitHub Pages project site (e.g. username.github.io/webnova), set:
-  // base: '/webnova',
-  // For custom domain or root user site, leave base as '/' (default)
-  base: '/',
+  // GitHub Pages project site configuration
+  site: 'https://pedramgholizadeh.github.io',
+  base: '/webnova-ai-made',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'de'],

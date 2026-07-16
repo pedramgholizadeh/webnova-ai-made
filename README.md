@@ -200,3 +200,71 @@ export default defineConfig({
 ---
 
 Built with care for WebNova. German precision × European creativity.
+
+## 🚀 Getting Started
+
+### Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+Visit http://localhost:4321
+
+### Build
+
+```bash
+npm run build
+```
+
+The static site will be generated in the `dist/` folder.
+
+### Bilingual Support
+
+- English is the default language (`/`)
+- German is available under `/de/` prefix (e.g. `/de/services`)
+- All pages have parallel German versions
+- Language switcher is available in the header
+
+### Services (11 Total)
+
+All service landing pages are available at:
+- `/services/[slug]`
+- `/de/services/[slug]`
+
+With full mega menu navigation and pricing tables.
+
+## ☁️ Cloudflare Worker (Lead Forms)
+
+Lead forms on service pages are ready to connect to Cloudflare D1.
+
+See `workers/README.md` for setup instructions:
+1. Create D1 database `webnova-db`
+2. Deploy the worker `workers/webnova-leads.js`
+3. Update the `WORKER_URL` in `ServiceLanding.astro`
+
+## 📦 GitHub Pages Deployment
+
+1. Push to `main` or `master` branch
+2. Go to repository Settings → Pages
+3. Set source to "GitHub Actions" (or use the Astro workflow)
+4. Astro config already includes `site` and `base` for GitHub Pages
+
+Or use the included GitHub Action (recommended):
+
+The project is pre-configured for GitHub Pages deployment.
+
+## 🛠 Tech Stack
+
+- Astro 4+
+- Tailwind CSS v4
+- TypeScript
+- Static output (perfect for CDN)
+
+## 📝 Notes
+
+- No JavaScript-heavy frameworks (vanilla where needed)
+- All images use placeholder URLs — replace with real assets
+- Update the worker URL in the form component after deploying your Cloudflare Worker
+

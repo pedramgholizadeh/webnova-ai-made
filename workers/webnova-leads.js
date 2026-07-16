@@ -3,10 +3,10 @@
  * Database: webnova-db (D1)
  *
  * Endpoints:
- *   POST /lead          → ثبت لید جدید
- *   GET  /leads         → لیست همه لیدها (JSON)
+ *   POST /lead          → Submit new lead
+ *   GET  /leads         → List all leads (JSON)
  *   GET  /leads?service=ai-landing-page → فیلتر بر اساس سرویس
- *   GET  /              → داشبورد ساده HTML برای مشاهده لیدها
+ *   GET  /              → Simple HTML dashboard to view leads
  */
 
 export default {
@@ -26,12 +26,12 @@ export default {
     }
 
     try {
-      // ===================== POST: ثبت لید =====================
+      // ===================== POST: Submit lead =====================
       if (request.method === 'POST' && pathname === '/lead') {
         const data = await request.json();
 
         if (!data.name || !data.email || !data.service) {
-          return jsonResponse({ error: 'name, email و service الزامی هستند' }, 400, corsHeaders);
+          return jsonResponse({ error: 'name, email and service are required' }, 400, corsHeaders);
         }
 
         const stmt = env.webnova_db.prepare(`
@@ -53,11 +53,11 @@ export default {
         return jsonResponse({
           success: true,
           id: result.meta.last_row_id,
-          message: 'لید با موفقیت ثبت شد'
+          message: 'Lead submitted successfully'
         }, 200, corsHeaders);
       }
 
-      // ===================== GET: لیست لیدها =====================
+      // ===================== GET: List leads =====================
       if (request.method === 'GET' && pathname === '/leads') {
         const service = searchParams.get('service');
 
@@ -125,7 +125,7 @@ function generateDashboardHTML(leads) {
   `).join('');
 
   return `<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>WebNova Leads Dashboard</title>
@@ -141,29 +141,29 @@ function generateDashboardHTML(leads) {
 </head>
 <body>
   <h1>WebNova Leads</h1>
-  <div class="stats">تعداد کل لیدها: <strong>${leads.length}</strong></div>
+  <div class="stats">Total leads: <strong>${leads.length}</strong></div>
   
   <table>
     <thead>
       <tr>
-        <th>تاریخ</th>
-        <th>سرویس</th>
-        <th>نام</th>
-        <th>ایمیل</th>
-        <th>تلفن</th>
-        <th>شرکت</th>
-        <th>پکیج</th>
-        <th>پیام</th>
+        <th>Date</th>
+        <th>Service</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Company</th>
+        <th>Package</th>
+        <th>Message</th>
       </tr>
     </thead>
     <tbody>
-      ${rows || '<tr><td colspan="8">هنوز لیدی ثبت نشده است.</td></tr>'}
+      ${rows || '<tr><td colspan="8">No leads submitted yet.</td></tr>'}
     </tbody>
   </table>
 
   <p style="margin-top: 30px; color: #666; font-size: 13px;">
-    برای فیلتر: <code>/leads?service=ai-landing-page</code><br>
-    API خام: <code>/leads</code>
+    Filter: <code>/leads?service=ai-landing-page</code><br>
+    Raw API: <code>/leads</code>
   </p>
 </body>
 </html>`;
