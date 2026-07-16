@@ -1,5 +1,5 @@
 ---
-import { getLocalizedPath, type Lang, useTranslations } from '../i18n/translations';
+import { getLocalizedPath, stripBase, type Lang, useTranslations } from '../i18n/translations';
 import { getAllServices } from '../data/ai-services';
 
 interface Props {
@@ -20,27 +20,28 @@ const navItems = [
   { href: '/contact', label: t('nav.contact') },
 ];
 
+// currentPath is already base-prefixed ("/webnova-ai-made/..."). Strip the base
+// before comparing/passing to getLocalizedPath (which re-adds it).
+const basePath = stripBase(currentPath);
+
 const isActive = (href: string) => {
-  const localized = getLocalizedPath(href, lang);
   if (href === '/') {
-    const homeEn = getLocalizedPath('/', 'en');
-    const homeDe = getLocalizedPath('/', 'de');
-    return currentPath === homeEn || currentPath === homeDe || currentPath === '/';
+    return basePath === '/' || basePath === '' || basePath === '/de' || basePath.startsWith('/de/');
   }
+  const localized = getLocalizedPath(href, lang);
   return currentPath === localized || currentPath.startsWith(localized + '/');
 };
 
 const switchLang = lang === 'en' ? 'de' : 'en';
 const switchLabel = lang === 'en' ? 'DE' : 'EN';
 
-// Improved language switcher that respects base
-const currentWithoutLang = currentPath.replace(/^\/de/, '') || '/';
-const targetPath = switchLang === 'de' 
-  ? getLocalizedPath(currentWithoutLang, 'de')
-  : getLocalizedPath(currentWithoutLang, 'en');
+// currentPath already includes the base; strip it, then rebuild for the target language
+const pathNoLang = basePath.replace(/^\/de/, '') || '/';
+const targetPath = switchLang === 'de'
+  ? getLocalizedPath(pathNoLang, 'de')
+  : getLocalizedPath(pathNoLang, 'en');
 
 const ctaText = t('nav.getInTouch');
-
 const logoHref = getLocalizedPath('/', lang);
 ---
 
@@ -160,7 +161,6 @@ const logoHref = getLocalizedPath('/', lang);
 </header>
 
 <script>
-  // Mobile menu toggle
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   

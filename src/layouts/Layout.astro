@@ -4,6 +4,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/translations';
 
+const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+
 export interface Props {
   title: string;
   description?: string;
@@ -26,8 +28,8 @@ const fullTitle = title.includes('WebNova') ? title : siteTitle;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}/favicon.svg`} />
+    <link rel="icon" href={`${baseUrl}/favicon.ico`} />
     
     <!-- SEO -->
     <title>{fullTitle}</title>

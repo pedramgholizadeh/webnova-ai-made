@@ -10,6 +10,13 @@ export const defaultLang: Lang = 'en';
 // Base path for GitHub Pages (e.g. '/webnova-ai-made' or '')
 const BASE = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
+export function stripBase(pathname: string): string {
+  if (BASE && BASE !== '/' && pathname.startsWith(BASE)) {
+    return pathname.slice(BASE.length) || '/';
+  }
+  return pathname;
+}
+
 export const ui = {
   en: {
     // Navigation
