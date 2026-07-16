@@ -1,5 +1,6 @@
 ---
 import { getLocalizedPath, type Lang, useTranslations } from '../i18n/translations';
+import { getAllServices } from '../data/ai-services';
 
 interface Props {
   currentPath: string;
@@ -8,11 +9,13 @@ interface Props {
 
 const { currentPath, lang } = Astro.props;
 const t = useTranslations(lang);
+const services = getAllServices(lang);
 
 const navItems = [
   { href: '/', label: t('nav.home') },
   { href: '/about', label: t('nav.about') },
-  { href: '/services', label: t('nav.services') },
+  { href: '/services', label: t('nav.services'), hasMega: true },
+  { href: '/team', label: lang === 'de' ? 'Team' : 'Team' },
   { href: '/work', label: t('nav.work') },
   { href: '/contact', label: t('nav.contact') },
 ];
@@ -27,7 +30,7 @@ const isActive = (href: string) => {
 
 const switchLang = lang === 'en' ? 'de' : 'en';
 const switchLabel = lang === 'en' ? 'DE' : 'EN';
-const switchHref = currentPath.replace(/^\/de/, '') || '/';
+const switchHref = currentPath.startsWith('/de') ? currentPath.replace('/de', '') || '/' : currentPath;
 const targetPath = switchLang === 'de' 
   ? `/de${switchHref === '/' ? '' : switchHref}` 
   : switchHref;
@@ -49,6 +52,45 @@ const ctaText = t('nav.getInTouch');
     <nav class="hidden md:flex items-center gap-9 text-sm">
       {navItems.map(item => {
         const href = getLocalizedPath(item.href, lang);
+        
+        if (item.hasMega) {
+          return (
+            <div class="relative group">
+              <a 
+                href={href}
+                class:list={[
+                  "nav-link text-sm font-medium transition-colors flex items-center gap-1",
+                  { "active": isActive(item.href) }
+                ]}
+              >
+                {item.label}
+                <span class="text-xs">▼</span>
+              </a>
+              
+              <!-- Mega Menu -->
+              <div class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[620px] hidden group-hover:block bg-[#0a0a0b] border border-zinc-800 rounded-2xl shadow-2xl p-6 z-50">
+                <div class="grid grid-cols-2 gap-x-8 gap-y-4">
+                  {services.map(service => (
+                    <a 
+                      href={getLocalizedPath(`/services/${service.slug}`, lang)}
+                      class="flex items-start gap-3 p-3 rounded-xl hover:bg-zinc-900 transition-colors group/item"
+                    >
+                      <div class="text-2xl mt-0.5">{service.icon}</div>
+                      <div class="flex-1 min-w-0">
+                        <div class="font-medium text-white group-hover/item:text-[#3b82f6] transition-colors">{service.title}</div>
+                        <div class="text-xs text-zinc-400 line-clamp-2 mt-1">{service.heroSubtitle}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+                <div class="border-t border-zinc-800 mt-6 pt-4 text-center">
+                  <a href={getLocalizedPath('/services', lang)} class="text-sm text-[#3b82f6] hover:underline">View all services →</a>
+                </div>
+              </div>
+            </div>
+          );
+        }
+        
         return (
           <a 
             href={href}
@@ -84,18 +126,10 @@ const ctaText = t('nav.getInTouch');
 
     <!-- Mobile -->
     <div class="md:hidden flex items-center gap-3">
-      <a 
-        href={targetPath}
-        class="px-3 py-1 text-xs font-medium text-zinc-400 border border-zinc-800 rounded-full"
-      >
+      <a href={targetPath} class="px-3 py-1 text-xs font-medium text-zinc-400 border border-zinc-800 rounded-full">
         {switchLabel}
       </a>
-      <button 
-        id="mobile-menu-btn"
-        aria-expanded="false"
-        aria-label="Toggle menu"
-        class="p-2 -mr-2 text-white"
-      >
+      <button id="mobile-menu-btn" aria-expanded="false" aria-label="Toggle menu" class="p-2 -mr-2 text-white">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -109,19 +143,25 @@ const ctaText = t('nav.getInTouch');
       {navItems.map(item => {
         const href = getLocalizedPath(item.href, lang);
         return (
-          <a href={href} class="font-medium text-lg py-1">
-            {item.label}
-          </a>
+          <a href={href} class="font-medium text-lg py-1">{item.label}</a>
         );
       })}
       <div class="pt-4 border-t border-zinc-800">
-        <a 
-          href={getLocalizedPath('/contact', lang)} 
-          class="btn btn-primary w-full justify-center"
-        >
-          {ctaText}
-        </a>
+        <a href={getLocalizedPath('/contact', lang)} class="btn btn-primary w-full justify-center">{ctaText}</a>
       </div>
     </div>
   </div>
 </header>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', (!isOpen).toString());
+    });
+  }
+</script>

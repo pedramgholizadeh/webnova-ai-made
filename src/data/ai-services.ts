@@ -25,301 +25,343 @@ export interface ServiceData {
   samples: SampleWork[];
   pricing: PricingTier[];
   formTitle: string;
+  icon: string;
 }
 
-export const aiServices: ServiceData[] = [
+const englishServices: ServiceData[] = [
   {
     slug: "ai-landing-page",
-    title: "طراحی لندینگ پیج با AI",
-    heroTitle: "لندینگ پیج‌های هوش مصنوعی که تبدیل می‌کنند",
-    heroSubtitle: "در کمتر از ۷۲ ساعت، لندینگ پیجی حرفه‌ای با هوش مصنوعی بسازید که فروش و لید شما را چند برابر کند.",
-    problem: "بسیاری از کسب‌وکارها لندینگ پیج ضعیف دارند که نه تنها تبدیل نمی‌کند، بلکه هزینه تبلیغات را هدر می‌دهد. طراحی دستی هم گران و زمان‌بر است.",
-    solutionTitle: "ما با هوش مصنوعی لندینگ پیج شما را می‌سازیم",
-    solutionDescription: "ترکیب طراحی انسانی + قدرت هوش مصنوعی برای ایجاد صفحات فرود با نرخ تبدیل بالا.",
+    title: "AI Landing Page Design",
+    icon: "🚀",
+    heroTitle: "Landing Pages Powered by AI That Actually Convert",
+    heroSubtitle: "Get a high-converting, professional landing page designed with AI in as little as 72 hours.",
+    problem: "Most businesses have weak landing pages that waste ad spend and fail to convert visitors into customers. Manual design is expensive and slow.",
+    solutionTitle: "We build AI-powered landing pages that perform",
+    solutionDescription: "Human creativity + AI efficiency to create high-converting landing pages.",
     solutionPoints: [
-      "تحقیق مخاطب و کپی‌رایتینگ حرفه‌ای با AI",
-      "طراحی بصری مدرن و موبایل‌فرست",
-      "بهینه‌سازی برای سرعت و سئو",
-      "A/B تست خودکار و تحلیل رفتار کاربر",
-      "اتصال به CRM و ابزارهای مارکتینگ"
+      "Audience research & professional copywriting with AI",
+      "Modern, mobile-first visual design",
+      "Speed and SEO optimization",
+      "Automatic A/B testing & user behavior analysis",
+      "CRM and marketing tool integration"
     ],
     samples: [
-      { title: "لندینگ محصول SaaS", client: "نرم‌افزار حسابداری", result: "افزایش ۳.۴ برابری نرخ تبدیل", image: "https://picsum.photos/id/1015/800/600" },
-      { title: "لندینگ دوره آموزشی", client: "آکادمی دیجیتال", result: "۱۸۰۰ لید در ماه اول", image: "https://picsum.photos/id/1033/800/600" },
-      { title: "لندینگ خدمات مشاوره", client: "شرکت مشاوره مالی", result: "نرخ رزرو ۴۲٪", image: "https://picsum.photos/id/160/800/600" },
+      { title: "SaaS Product Landing", client: "Accounting Software", result: "3.4× higher conversion rate", image: "https://picsum.photos/id/1015/800/600" },
+      { title: "Online Course Landing", client: "Digital Academy", result: "1,800 leads in first month", image: "https://picsum.photos/id/1033/800/600" },
+      { title: "Consulting Services", client: "Financial Advisory", result: "42% booking rate", image: "https://picsum.photos/id/160/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۱۲,۹۰۰,۰۰۰", period: "تومان", features: ["طراحی کامل یک لندینگ", "کپی‌رایتینگ AI", "بهینه‌سازی موبایل", "تحویل در ۵ روز کاری", "۱ دور اصلاح"] },
-      { name: "Premium", price: "۲۴,۵۰۰,۰۰۰", period: "تومان", features: ["همه چیز Normal +", "تحقیق عمیق مخاطب", "A/B تست دو نسخه", "اتصال به CRM", "تحلیل رفتار کاربر", "۳ دور اصلاح"], popular: true },
-      { name: "Max", price: "۳۹,۰۰۰,۰۰۰", period: "تومان", features: ["همه چیز Premium +", "لندینگ چندزبانه", "اتوماسیون کامل مارکتینگ", "گزارش ماهانه عملکرد", "بهینه‌سازی مداوم ۳۰ روزه"] },
+      { name: "Normal", price: "€1,290", period: "one-time", features: ["Full landing page design", "AI-assisted copy", "Mobile optimization", "5 business day delivery", "1 revision round"] },
+      { name: "Premium", price: "€2,450", period: "one-time", features: ["Everything in Normal", "Deep audience research", "A/B testing setup", "CRM integration", "3 revision rounds"], popular: true },
+      { name: "Max", price: "€3,900", period: "one-time", features: ["Everything in Premium", "Multilingual version", "Full marketing automation", "30-day performance optimization"] },
     ],
-    formTitle: "لندینگ پیج خود را با AI سفارش دهید"
+    formTitle: "Order Your AI Landing Page"
   },
   {
     slug: "ai-website",
-    title: "طراحی سایت با AI",
-    heroTitle: "وبسایت کامل با قدرت هوش مصنوعی",
-    heroSubtitle: "سایتی سریع، زیبا و هوشمند که دقیقاً مطابق نیاز کسب‌وکار شما ساخته می‌شود.",
-    problem: "طراحی سایت سنتی هزینه‌بر، زمان‌بر و اغلب غیرقابل به‌روزرسانی است. بسیاری از سایت‌ها بعد از چند ماه منسوخ می‌شوند.",
-    solutionTitle: "سایت‌هایی که با AI ساخته و بهینه می‌شوند",
-    solutionDescription: "ما از جدیدترین ابزارهای هوش مصنوعی برای طراحی، محتوا و بهینه‌سازی استفاده می‌کنیم.",
+    title: "AI Website Design",
+    icon: "🌐",
+    heroTitle: "Modern Websites Built with AI",
+    heroSubtitle: "Fast, beautiful, and intelligent websites designed and optimized with the help of AI.",
+    problem: "Traditional websites are slow to build, expensive to maintain, and often become outdated quickly.",
+    solutionTitle: "Websites that combine human design with AI power",
+    solutionDescription: "We use AI to accelerate design, content creation, and optimization while maintaining premium human quality.",
     solutionPoints: [
-      "طراحی UI/UX حرفه‌ای با کمک AI",
-      "تولید محتوا و سئو خودکار",
-      "سایت فوق‌العاده سریع (Core Web Vitals عالی)",
-      "پنل مدیریت ساده و قدرتمند",
-      "امنیت و پشتیبانی مداوم"
+      "Professional UI/UX designed with AI assistance",
+      "AI-generated content + human refinement",
+      "Extremely fast performance (Core Web Vitals)",
+      "Easy-to-use content management system",
+      "Ongoing security and support"
     ],
     samples: [
-      { title: "سایت فروشگاهی مد", client: "برند لباس", result: "افزایش ۲۷۰٪ فروش آنلاین", image: "https://picsum.photos/id/106/800/600" },
-      { title: "سایت شرکتی مشاوره", client: "شرکت مشاوره", result: "لیدهای ماهانه ۳ برابر", image: "https://picsum.photos/id/201/800/600" },
-      { title: "سایت کلینیک زیبایی", client: "کلینیک پوست", result: "رزرو آنلاین +۱۸۰٪", image: "https://picsum.photos/id/29/800/600" },
+      { title: "Fashion E-commerce", client: "Clothing Brand", result: "270% increase in online sales", image: "https://picsum.photos/id/106/800/600" },
+      { title: "Corporate Website", client: "Consulting Firm", result: "3× more qualified leads", image: "https://picsum.photos/id/201/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۲۸,۰۰۰,۰۰۰", period: "تومان", features: ["سایت تا ۸ صفحه", "طراحی با AI + انسانی", "بهینه‌سازی سرعت", "فرم‌های تماس", "تحویل ۱۰ روزه"] },
-      { name: "Premium", price: "۴۵,۰۰۰,۰۰۰", period: "تومان", features: ["تا ۱۵ صفحه + بلاگ", "سئو حرفه‌ای", "پنل مدیریت کامل", "اتصال به درگاه", "۲ ماه پشتیبانی"], popular: true },
-      { name: "Max", price: "۷۲,۰۰۰,۰۰۰", period: "تومان", features: ["سایت نامحدود + فروشگاه", "AI Chatbot", "اتوماسیون کامل", "گزارش ماهانه", "پشتیبانی ۶ ماهه"] },
+      { name: "Normal", price: "€2,800", period: "one-time", features: ["Up to 8 pages", "AI + Human design", "Speed optimization", "Contact forms", "10-day delivery"] },
+      { name: "Premium", price: "€4,500", period: "one-time", features: ["Up to 15 pages + blog", "Advanced SEO", "Full CMS", "Payment integration", "2 months support"], popular: true },
+      { name: "Max", price: "€7,200", period: "one-time", features: ["Unlimited pages + shop", "AI Chatbot", "Full automation", "6 months support"] },
     ],
-    formTitle: "سایت خود را با هوش مصنوعی سفارش دهید"
+    formTitle: "Build Your AI-Powered Website"
   },
   {
     slug: "mobile-app-design",
-    title: "طراحی اپلیکیشن اندروید و iOS",
-    heroTitle: "اپلیکیشن موبایل که کاربران عاشقش می‌شوند",
-    heroSubtitle: "طراحی و توسعه اپلیکیشن اندروید و iOS با تمرکز روی تجربه کاربری عالی و عملکرد بالا.",
-    problem: "بسیاری از اپ‌ها رابط کاربری ضعیف دارند، باگ زیاد است و کاربران بعد از یک بار استفاده حذف می‌کنند.",
-    solutionTitle: "اپ‌هایی که طراحی و توسعه‌شان با استاندارد جهانی است",
-    solutionDescription: "ما اپلیکیشن‌های native و cross-platform با کیفیت بالا و تجربه کاربری بی‌نقص تحویل می‌دهیم.",
+    title: "Android & iOS App Design",
+    icon: "📱",
+    heroTitle: "Mobile Apps Users Actually Love",
+    heroSubtitle: "Beautiful, high-performance apps for Android and iOS with exceptional user experience.",
+    problem: "Many apps suffer from poor UX, bugs, low retention, and fail to engage users after the first use.",
+    solutionTitle: "World-class mobile apps with premium UX",
+    solutionDescription: "We design and develop apps that feel premium and perform flawlessly on both platforms.",
     solutionPoints: [
-      "طراحی UI/UX حرفه‌ای و مدرن",
-      "توسعه Native + Flutter/React Native",
-      "تست کامل و بهینه‌سازی عملکرد",
-      "انتشار در کافه‌بازار، گوگل پلی و اپ استور",
-      "پشتیبانی و به‌روزرسانی مداوم"
+      "Premium UI/UX design for mobile",
+      "Native + cross-platform development (Flutter/React Native)",
+      "Thorough testing and performance tuning",
+      "App Store and Google Play publishing support",
+      "Ongoing updates and maintenance"
     ],
     samples: [
-      { title: "اپلیکیشن سلامت", client: "استارتاپ سلامت", result: "۵۰ هزار دانلود در ۳ ماه", image: "https://picsum.photos/id/251/800/600" },
-      { title: "اپلیکیشن آموزشی", client: "پلتفرم آموزش", result: "رتبه ۴.۸ در مارکت", image: "https://picsum.photos/id/160/800/600" },
-      { title: "اپلیکیشن فروشگاهی", client: "برند FMCG", result: "افزایش ۳۴۰٪ سفارش", image: "https://picsum.photos/id/1015/800/600" },
+      { title: "Health & Fitness App", client: "Health Startup", result: "50k downloads in 3 months", image: "https://picsum.photos/id/251/800/600" },
+      { title: "Educational Platform", client: "Learning App", result: "4.8 rating on stores", image: "https://picsum.photos/id/160/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۸۵,۰۰۰,۰۰۰", period: "تومان", features: ["طراحی کامل UI/UX", "توسعه یک پلتفرم", "انتشار در مارکت", "۳ ماه پشتیبانی"] },
-      { name: "Premium", price: "۱۳۵,۰۰۰,۰۰۰", period: "تومان", features: ["اندروید + iOS", "بک‌اند کامل", "اعلان push + پرداخت", "۶ ماه پشتیبانی"], popular: true },
-      { name: "Max", price: "۱۹۵,۰۰۰,۰۰۰", period: "تومان", features: ["اپ کامل + وب اپ", "AI Features", "تحلیل و بهینه‌سازی", "۱ سال پشتیبانی و توسعه"] },
+      { name: "Normal", price: "€8,500", period: "one-time", features: ["Full UI/UX design", "Single platform", "App store submission", "3 months support"] },
+      { name: "Premium", price: "€13,500", period: "one-time", features: ["Android + iOS", "Backend included", "Push + payments", "6 months support"], popular: true },
+      { name: "Max", price: "€19,500", period: "one-time", features: ["Full app + web version", "AI features", "Analytics & optimization", "1 year support"] },
     ],
-    formTitle: "اپلیکیشن خود را سفارش دهید"
+    formTitle: "Start Your Mobile App Project"
   },
   {
     slug: "web-app",
-    title: "طراحی وب اپلیکیشن",
-    heroTitle: "وب اپلیکیشن‌های قدرتمند و مقیاس‌پذیر",
-    heroSubtitle: "از ابزارهای داخلی گرفته تا پلتفرم‌های SaaS — وب اپ‌هایی که دقیق کار می‌کنند.",
-    problem: "بسیاری از شرکت‌ها هنوز با اکسل و ابزارهای قدیمی کار می‌کنند یا نرم‌افزارهای گران خارجی استفاده می‌کنند.",
-    solutionTitle: "وب اپلیکیشن سفارشی دقیقاً برای کسب‌وکار شما",
-    solutionDescription: "ما وب اپلیکیشن‌هایی می‌سازیم که فرآیندهای شما را خودکار و هوشمند می‌کنند.",
+    title: "Web Application Design",
+    icon: "💻",
+    heroTitle: "Powerful Custom Web Applications",
+    heroSubtitle: "Internal tools, SaaS platforms, and complex web apps built for real business needs.",
+    problem: "Companies still rely on spreadsheets or expensive, inflexible legacy software.",
+    solutionTitle: "Custom web apps that perfectly fit your workflow",
+    solutionDescription: "We build scalable, secure web applications that replace inefficient processes.",
     solutionPoints: [
-      "طراحی داشبورد و رابط کاربری حرفه‌ای",
-      "توسعه با تکنولوژی‌های مدرن (Next.js, Nuxt)",
-      "امنیت بالا و مقیاس‌پذیری",
-      "اتصال به API و سیستم‌های موجود",
-      "هوش مصنوعی داخلی (در صورت نیاز)"
+      "Professional dashboard and interface design",
+      "Modern tech stack (Next.js, TypeScript)",
+      "High security and scalability",
+      "Integration with existing tools and APIs",
+      "Optional AI features built-in"
     ],
     samples: [
-      { title: "داشبورد مدیریت", client: "شرکت پخش", result: "کاهش ۶۵٪ زمان گزارش‌گیری", image: "https://picsum.photos/id/201/800/600" },
-      { title: "پلتفرم CRM سفارشی", client: "آژانس تبلیغاتی", result: "افزایش ۸۰٪ بهره‌وری تیم", image: "https://picsum.photos/id/1033/800/600" },
-      { title: "سیستم رزرو آنلاین", client: "کلینیک زنجیره‌ای", result: "رشد ۲۲۰٪ رزرو", image: "https://picsum.photos/id/29/800/600" },
+      { title: "Operations Dashboard", client: "Distribution Company", result: "65% faster reporting", image: "https://picsum.photos/id/201/800/600" },
+      { title: "Custom CRM", client: "Marketing Agency", result: "80% team productivity boost", image: "https://picsum.photos/id/1033/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۶۲,۰۰۰,۰۰۰", period: "تومان", features: ["وب اپ تا ۵ ماژول", "پنل ادمین کامل", "پایگاه داده", "۳ ماه پشتیبانی"] },
-      { name: "Premium", price: "۹۸,۰۰۰,۰۰۰", period: "تومان", features: ["ماژول‌های نامحدود", "احراز هویت پیشرفته", "گزارش‌گیری پیشرفته", "۶ ماه پشتیبانی"], popular: true },
-      { name: "Max", price: "۱۴۵,۰۰۰,۰۰۰", period: "تومان", features: ["AI Features کامل", "Multi-tenant", "API عمومی", "۱ سال پشتیبانی و توسعه"] },
+      { name: "Normal", price: "€6,200", period: "one-time", features: ["Up to 5 modules", "Admin panel", "Database setup", "3 months support"] },
+      { name: "Premium", price: "€9,800", period: "one-time", features: ["Unlimited modules", "Advanced authentication", "Reporting system", "6 months support"], popular: true },
+      { name: "Max", price: "€14,500", period: "one-time", features: ["AI features included", "Multi-tenant architecture", "Public API", "1 year support"] },
     ],
-    formTitle: "وب اپلیکیشن خود را سفارش دهید"
+    formTitle: "Order Your Custom Web App"
   },
   {
     slug: "ai-instagram-story",
-    title: "طراحی استوری اینستاگرام با AI",
-    heroTitle: "استوری‌های اینستاگرام که توجه را می‌دزدند",
-    heroSubtitle: "هر روز استوری‌های حرفه‌ای، جذاب و با نرخ تعامل بالا با کمک هوش مصنوعی تحویل بگیرید.",
-    problem: "تولید روزانه محتوای استوری وقت‌گیر است و بسیاری از برندها استوری‌های تکراری و بی‌کیفیت پست می‌کنند.",
-    solutionTitle: "استوری‌هایی که برند شما را زنده نگه می‌دارند",
-    solutionDescription: "ما با ترکیب خلاقیت انسانی و هوش مصنوعی، استوری‌های باکیفیت و هدفمند تولید می‌کنیم.",
+    title: "AI Instagram Story Design",
+    icon: "📸",
+    heroTitle: "Instagram Stories That Stop the Scroll",
+    heroSubtitle: "Daily professional, high-engagement Instagram Stories created with AI assistance.",
+    problem: "Creating consistent daily stories is time-consuming and most brands post low-quality, repetitive content.",
+    solutionTitle: "Stories that keep your brand top of mind",
+    solutionDescription: "We combine creativity with AI to deliver scroll-stopping stories that drive engagement.",
     solutionPoints: [
-      "طراحی بصری جذاب و برندمحور",
-      "کپی‌رایتینگ قوی و کال تو اکشن",
-      "استفاده از ترندهای روز",
-      "بهینه‌سازی برای حفظ مخاطب",
-      "تحویل روزانه یا هفتگی"
+      "On-brand visual design",
+      "Strong copy and calls-to-action",
+      "Trend-aware and timely content",
+      "Engagement optimization",
+      "Weekly or daily delivery options"
     ],
     samples: [
-      { title: "استوری برند زیبایی", client: "برند آرایشی", result: "میانگین ۱۸٪ تعامل", image: "https://picsum.photos/id/1005/800/600" },
-      { title: "استوری فروشگاه آنلاین", client: "فروشگاه پوشاک", result: "افزایش ۹۰٪ کلیک به سایت", image: "https://picsum.photos/id/106/800/600" },
+      { title: "Beauty Brand Stories", client: "Cosmetics Company", result: "18% average engagement", image: "https://picsum.photos/id/1005/800/600" },
+      { title: "E-commerce Stories", client: "Fashion Store", result: "90% more site traffic", image: "https://picsum.photos/id/106/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۳,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["۱۵ استوری در ماه", "طراحی + کپی", "تحویل هر ۲ روز"] },
-      { name: "Premium", price: "۷,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["۳۰ استوری در ماه", "استوری تعاملی", "آنالیز عملکرد", "اولویت تحویل"], popular: true },
-      { name: "Max", price: "۱۲,۵۰۰,۰۰۰", period: "تومان/ماه", features: ["نامحدود + ریلز کوتاه", "استراتژی محتوایی", "گزارش ماهانه", "مشاوره مستقیم"] },
+      { name: "Normal", price: "€390", period: "/month", features: ["15 Stories per month", "Design + Copy", "Delivery every 2 days"] },
+      { name: "Premium", price: "€790", period: "/month", features: ["30 Stories per month", "Interactive elements", "Performance reports"], popular: true },
+      { name: "Max", price: "€1,250", period: "/month", features: ["Unlimited + Reels", "Content strategy", "Monthly consulting"] },
     ],
-    formTitle: "پکیج استوری اینستاگرام خود را انتخاب کنید"
+    formTitle: "Start Your AI Story Package"
   },
   {
     slug: "ai-instagram-post",
-    title: "طراحی پست اسلایدی اینستاگرام با AI",
-    heroTitle: "پست‌های اسلایدی که مخاطب را نگه می‌دارند",
-    heroSubtitle: "پست‌های حرفه‌ای چند اسلایدی با داستان‌گویی قوی که الگوریتم اینستاگرام عاشقشان است.",
-    problem: "پست‌های تک‌عکس دیگر کارایی ندارند. مخاطب اسکرول می‌کند و محتوا دیده نمی‌شود.",
-    solutionTitle: "پست‌های اسلایدی با داستان و ارزش",
-    solutionDescription: "ما پست‌های اسلایدی زیبا و هدفمند طراحی می‌کنیم که نرخ سیو و شیر بالایی دارند.",
+    title: "AI Instagram Carousel Design",
+    icon: "🖼️",
+    heroTitle: "Carousel Posts That Hold Attention",
+    heroSubtitle: "High-performing multi-slide Instagram posts with powerful storytelling.",
+    problem: "Single-image posts no longer perform well as users scroll past them quickly.",
+    solutionTitle: "Story-driven carousels that get saved and shared",
+    solutionDescription: "We create narrative-driven carousels optimized for saves, shares, and algorithm reach.",
     solutionPoints: [
-      "طراحی بصری یکپارچه و حرفه‌ای",
-      "داستان‌گویی و کپی‌رایتینگ قوی",
-      "استفاده از هوش مصنوعی برای ایده‌پردازی",
-      "بهینه‌سازی برای الگوریتم",
-      "تقویم محتوایی ماهانه"
+      "Cohesive, premium visual systems",
+      "Narrative copywriting that educates",
+      "AI-assisted ideation and trends",
+      "Algorithm-friendly formatting",
+      "Monthly content calendar included"
     ],
     samples: [
-      { title: "پست آموزشی مالی", client: "مشاور مالی", result: "بیش از ۴۰۰۰ سیو", image: "https://picsum.photos/id/201/800/600" },
-      { title: "پست معرفی محصول", client: "برند تکنولوژی", result: "نرخ تعامل ۱۴٪", image: "https://picsum.photos/id/160/800/600" },
+      { title: "Educational Finance Carousel", client: "Financial Advisor", result: "4,000+ saves", image: "https://picsum.photos/id/201/800/600" },
+      { title: "Product Showcase", client: "Tech Brand", result: "14% engagement rate", image: "https://picsum.photos/id/160/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۴,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["۱۲ پست اسلایدی", "طراحی + کپی", "تقویم محتوا"] },
-      { name: "Premium", price: "۸,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["۲۰ پست + ۴ ریلز", "تحقیق مخاطب", "آنالیز و گزارش"], popular: true },
-      { name: "Max", price: "۱۴,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["نامحدود", "استراتژی کامل", "مشاوره هفتگی"] },
+      { name: "Normal", price: "€490", period: "/month", features: ["12 carousel posts", "Design + Copy", "Content calendar"] },
+      { name: "Premium", price: "€890", period: "/month", features: ["20 posts + 4 Reels", "Audience research", "Analytics report"], popular: true },
+      { name: "Max", price: "€1,490", period: "/month", features: ["Unlimited posts", "Full strategy", "Weekly consulting"] },
     ],
-    formTitle: "پکیج پست اسلایدی خود را سفارش دهید"
+    formTitle: "Order AI Carousel Package"
   },
   {
     slug: "ai-avatar",
-    title: "آواتار هوش مصنوعی",
-    heroTitle: "آواتارهای هوش مصنوعی واقعی و حرفه‌ای",
-    heroSubtitle: "آواتارهایی که صحبت می‌کنند، توضیح می‌دهند و برند شما را به صورت ۲۴ ساعته نمایندگی می‌کنند.",
-    problem: "حضور مداوم در ویدیو و تولید محتوا برای بنیان‌گذاران و کارشناسان بسیار وقت‌گیر و پرهزینه است.",
-    solutionTitle: "آواتارهای هوشمند که مثل شما صحبت می‌کنند",
-    solutionDescription: "ما آواتارهای واقع‌گرایانه با صدای شما یا صدای حرفه‌ای می‌سازیم.",
+    title: "AI Avatar Creation",
+    icon: "👤",
+    heroTitle: "Realistic AI Avatars That Speak for Your Brand",
+    heroSubtitle: "Professional AI avatars that can present, explain, and sell 24/7.",
+    problem: "Founders and experts spend too much time recording videos and creating repetitive content.",
+    solutionTitle: "Lifelike avatars with your voice and style",
+    solutionDescription: "We create realistic AI avatars that represent your brand with natural speech and movement.",
     solutionPoints: [
-      "ایجاد آواتار با ظاهر واقعی شما",
-      "همگام‌سازی لب و صدا",
-      "تولید ویدیو از متن (Text-to-Video)",
-      "استفاده در آموزش، فروش و پشتیبانی",
-      "چندین زبان و استایل مختلف"
+      "Photorealistic avatar creation",
+      "Lip-sync and natural speech",
+      "Text-to-video generation",
+      "Use for training, sales, support",
+      "Multiple languages and styles"
     ],
     samples: [
-      { title: "آواتار مدرس دوره", client: "آکادمی آنلاین", result: "کاهش ۷۰٪ هزینه تولید محتوا", image: "https://picsum.photos/id/1005/800/600" },
-      { title: "آواتار فروشنده", client: "شرکت نرم‌افزاری", result: "افزایش ۴۵٪ نرخ تبدیل دمو", image: "https://picsum.photos/id/1011/800/600" },
+      { title: "Course Instructor Avatar", client: "Online Academy", result: "70% reduction in content costs", image: "https://picsum.photos/id/1005/800/600" },
+      { title: "Sales Avatar", client: "SaaS Company", result: "45% higher demo conversion", image: "https://picsum.photos/id/1011/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۱۸,۹۰۰,۰۰۰", period: "تومان", features: ["۱ آواتار پایه", "۱۰ دقیقه ویدیو", "صدای استاندارد"] },
-      { name: "Premium", price: "۳۲,۰۰۰,۰۰۰", period: "تومان", features: ["آواتار واقع‌گرایانه", "۳۰ دقیقه ویدیو", "صدای شما", "چندین استایل"], popular: true },
-      { name: "Max", price: "۵۵,۰۰۰,۰۰۰", period: "تومان", features: ["آواتار نامحدود", "ویدیوهای طولانی", "یکپارچه‌سازی با سایت", "پشتیبانی و به‌روزرسانی"] },
+      { name: "Normal", price: "€1,890", period: "one-time", features: ["1 basic avatar", "10 minutes of video", "Standard voice"] },
+      { name: "Premium", price: "€3,200", period: "one-time", features: ["Photorealistic avatar", "30 minutes video", "Your own voice", "Multiple styles"], popular: true },
+      { name: "Max", price: "€5,500", period: "one-time", features: ["Unlimited avatars", "Long-form videos", "Website integration", "Ongoing updates"] },
     ],
-    formTitle: "آواتار هوش مصنوعی خود را بسازید"
+    formTitle: "Create Your AI Avatar"
   },
   {
     slug: "ai-influencer",
-    title: "اینفلوئنسر هوش مصنوعی",
-    heroTitle: "اینفلوئنسر مجازی که برای برند شما کار می‌کند",
-    heroSubtitle: "اینفلوئنسرهای هوش مصنوعی ۱۰۰٪ تحت کنترل شما که هیچ‌وقت خسته نمی‌شوند و همیشه در دسترس هستند.",
-    problem: "همکاری با اینفلوئنسرهای واقعی گران، غیرقابل پیش‌بینی و گاهی پرریسک است.",
-    solutionTitle: "اینفلوئنسر مجازی اختصاصی برند شما",
-    solutionDescription: "ما اینفلوئنسرهای مجازی با هویت، شخصیت و مخاطب مشخص برای برند شما می‌سازیم.",
+    title: "AI Influencer Creation",
+    icon: "⭐",
+    heroTitle: "Your Own Fully Controlled AI Influencer",
+    heroSubtitle: "Virtual influencers 100% dedicated to your brand that work around the clock.",
+    problem: "Working with real influencers is expensive, unpredictable, and carries brand risk.",
+    solutionTitle: "A virtual influencer 100% dedicated to your brand",
+    solutionDescription: "We build complete AI influencers with personality, content, and audience engagement.",
     solutionPoints: [
-      "طراحی شخصیت کامل + استوری",
-      "تولید محتوا در اینستاگرام، تیک‌تاک و یوتیوب",
-      "تعامل خودکار با مخاطبان",
-      "فروش محصول و لینک‌سازی",
-      "گزارش دقیق عملکرد"
+      "Complete personality and backstory design",
+      "Content creation across platforms",
+      "Automated audience engagement",
+      "Product promotion and direct sales",
+      "Detailed performance reporting"
     ],
     samples: [
-      { title: "اینفلوئنسر زیبایی", client: "برند آرایشی", result: "۱۸۰ هزار فالوور در ۴ ماه", image: "https://picsum.photos/id/1009/800/600" },
-      { title: "اینفلوئنسر تکنولوژی", client: "استارتاپ", result: "نرخ تعامل ۱۱٪", image: "https://picsum.photos/id/201/800/600" },
+      { title: "Beauty Influencer", client: "Cosmetics Brand", result: "180k followers in 4 months", image: "https://picsum.photos/id/1009/800/600" },
+      { title: "Tech Influencer", client: "Startup", result: "11% engagement rate", image: "https://picsum.photos/id/201/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۲۴,۵۰۰,۰۰۰", period: "تومان/ماه", features: ["۱ اینفلوئنسر", "۱۵ پست در ماه", "گزارش ماهانه"] },
-      { name: "Premium", price: "۴۲,۰۰۰,۰۰۰", period: "تومان/ماه", features: ["اینفلوئنسر کامل", "۳۰ محتوا + ریلز", "تعامل فعال", "گزارش دقیق"], popular: true },
-      { name: "Max", price: "۶۸,۰۰۰,۰۰۰", period: "تومان/ماه", features: ["چند اینفلوئنسر", "کمپین کامل", "فروش مستقیم", "استراتژی + مشاوره"] },
+      { name: "Normal", price: "€2,450", period: "/month", features: ["1 AI Influencer", "15 posts/month", "Monthly report"] },
+      { name: "Premium", price: "€4,200", period: "/month", features: ["Full influencer setup", "30 pieces of content", "Active engagement"], popular: true },
+      { name: "Max", price: "€6,800", period: "/month", features: ["Multiple influencers", "Full campaigns", "Direct sales integration"] },
     ],
-    formTitle: "اینفلوئنسر مجازی خود را راه‌اندازی کنید"
+    formTitle: "Launch Your AI Influencer"
   },
   {
     slug: "social-media-analytics",
-    title: "آنالیز سوشال مدیا",
-    heroTitle: "داده‌هایی که تصمیم‌گیری را هوشمند می‌کنند",
-    heroSubtitle: "تحلیل عمیق عملکرد شبکه‌های اجتماعی و ارائه گزارش‌های actionable برای رشد واقعی.",
-    problem: "بسیاری از برندها محتوا تولید می‌کنند اما نمی‌دانند چه چیزی کار می‌کند و چه چیزی نه.",
-    solutionTitle: "تحلیل حرفه‌ای + توصیه‌های عملی",
-    solutionDescription: "ما داده‌ها را به بینش تبدیل می‌کنیم و استراتژی شما را بهینه می‌کنیم.",
+    title: "Social Media Analysis",
+    icon: "📊",
+    heroTitle: "Data That Drives Real Growth",
+    heroSubtitle: "Deep analysis and actionable insights for your social media performance.",
+    problem: "Brands create content but have no clear idea what actually works and why.",
+    solutionTitle: "Professional analysis + clear recommendations",
+    solutionDescription: "We turn your social data into clear insights and executable growth strategies.",
     solutionPoints: [
-      "آنالیز کامل اینستاگرام، لینکدین، تلگرام و...",
-      "شناسایی بهترین زمان و نوع محتوا",
-      "تحلیل رقبا",
-      "گزارش ماهانه + داشبورد زنده",
-      "توصیه‌های اجرایی قابل اجرا"
+      "Full analysis across Instagram, LinkedIn, TikTok and more",
+      "Best time, format, and content type identification",
+      "Competitor analysis",
+      "Monthly reports + live dashboard",
+      "Actionable strategy recommendations"
     ],
     samples: [
-      { title: "آنالیز برند FMCG", client: "شرکت غذایی", result: "افزایش ۹۰٪ بازدهی تبلیغات", image: "https://picsum.photos/id/251/800/600" },
-      { title: "آنالیز آژانس", client: "آژانس دیجیتال", result: "بهبود ۳۵٪ نرخ تعامل", image: "https://picsum.photos/id/1033/800/600" },
+      { title: "FMCG Brand Analysis", client: "Food Company", result: "90% better ad efficiency", image: "https://picsum.photos/id/251/800/600" },
+      { title: "Agency Performance", client: "Digital Agency", result: "35% engagement improvement", image: "https://picsum.photos/id/1033/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۵,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["گزارش ماهانه", "۳ شبکه اجتماعی", "توصیه‌های کلیدی"] },
-      { name: "Premium", price: "۹,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["گزارش + داشبورد", "۵ شبکه", "تحلیل رقبا", "جلسه مشاوره"], popular: true },
-      { name: "Max", price: "۱۵,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["همه چیز + AI Insights", "استراتژی ماهانه", "پیگیری اجرا"] },
+      { name: "Normal", price: "€590", period: "/month", features: ["Monthly report", "3 platforms", "Key recommendations"] },
+      { name: "Premium", price: "€990", period: "/month", features: ["Report + live dashboard", "5 platforms", "Competitor analysis", "Strategy call"], popular: true },
+      { name: "Max", price: "€1,590", period: "/month", features: ["AI insights", "Monthly strategy", "Implementation support"] },
     ],
-    formTitle: "آنالیز سوشال مدیا خود را شروع کنید"
+    formTitle: "Get Your Social Media Analysis"
   },
   {
     slug: "ad-campaign",
-    title: "کمپین تبلیغاتی و اجرا",
-    heroTitle: "کمپین‌هایی که نتیجه می‌دهند، نه فقط نمایش",
-    heroSubtitle: "طراحی، اجرا و بهینه‌سازی کمپین‌های تبلیغاتی در اینستاگرام، گوگل، تلگرام و لینکدین.",
-    problem: "بسیاری از کسب‌وکارها هزینه زیادی صرف تبلیغات می‌کنند اما ROI پایینی دارند.",
-    solutionTitle: "کمپین‌های هدفمند با استراتژی و اجرا حرفه‌ای",
-    solutionDescription: "از تحقیق تا اجرا و بهینه‌سازی مداوم — ما کل فرآیند را مدیریت می‌کنیم.",
+    title: "Advertising Campaign & Execution",
+    icon: "📢",
+    heroTitle: "Advertising That Delivers Real ROI",
+    heroSubtitle: "Strategy, creative development, and execution for Instagram, Google, and LinkedIn.",
+    problem: "Many companies spend heavily on ads but see very poor or negative return on investment.",
+    solutionTitle: "Data-driven campaigns with strong creative",
+    solutionDescription: "We handle the full cycle from strategy to optimization for profitable campaigns.",
     solutionPoints: [
-      "تحقیق مخاطب و استراتژی کمپین",
-      "طراحی کراتیوهای باکیفیت",
-      "مدیریت بودجه و بهینه‌سازی روزانه",
-      "گزارش شفاف و دقیق",
-      "ترکیب تبلیغات ارگانیک و پولی"
+      "Audience research and campaign strategy",
+      "High-quality ad creative production",
+      "Daily budget management and optimization",
+      "Transparent, detailed reporting",
+      "Organic + paid synergy"
     ],
     samples: [
-      { title: "کمپین لانچ محصول", client: "استارتاپ", result: "۸.۴ برابر بازگشت سرمایه", image: "https://picsum.photos/id/160/800/600" },
-      { title: "کمپین جذب لید", client: "خدمات آموزشی", result: "لید با هزینه ۶۵٪ کمتر", image: "https://picsum.photos/id/201/800/600" },
+      { title: "Product Launch Campaign", client: "Tech Startup", result: "8.4× ROAS", image: "https://picsum.photos/id/160/800/600" },
+      { title: "Lead Generation", client: "Education Platform", result: "65% lower cost per lead", image: "https://picsum.photos/id/201/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۱۵,۹۰۰,۰۰۰", period: "تومان/ماه", features: ["مدیریت ۱ پلتفرم", "کراتیو پایه", "گزارش ماهانه"] },
-      { name: "Premium", price: "۲۸,۵۰۰,۰۰۰", period: "تومان/ماه", features: ["چند پلتفرم", "کراتیو حرفه‌ای", "بهینه‌سازی روزانه", "گزارش هفتگی"], popular: true },
-      { name: "Max", price: "۴۵,۰۰۰,۰۰۰", period: "تومان/ماه", features: ["کمپین کامل ۳۶۰ درجه", "تولید محتوا", "AI Targeting", "جلسه استراتژیک"] },
+      { name: "Normal", price: "€1,590", period: "/month", features: ["1 platform management", "Basic creative", "Monthly reporting"] },
+      { name: "Premium", price: "€2,850", period: "/month", features: ["Multi-platform", "Professional creative", "Daily optimization"], popular: true },
+      { name: "Max", price: "€4,500", period: "/month", features: ["360° campaign", "Content production", "AI targeting", "Strategy sessions"] },
     ],
-    formTitle: "کمپین تبلیغاتی خود را راه‌اندازی کنید"
+    formTitle: "Launch Your Ad Campaign"
   },
   {
     slug: "ai-automation",
-    title: "اتومیشن AI مخصوص بیزنس‌ها",
-    heroTitle: "کسب‌وکار خود را با هوش مصنوعی خودکار کنید",
-    heroSubtitle: "اتوماسیون‌های هوشمند که کارهای تکراری را حذف و بهره‌وری را چند برابر می‌کنند.",
-    problem: "زمان زیادی صرف کارهای تکراری مثل پاسخ به مشتری، پیگیری، تولید گزارش و مدیریت محتوا می‌شود.",
-    solutionTitle: "اتوماسیون‌های AI که مثل یک تیم ۲۴ ساعته کار می‌کنند",
-    solutionDescription: "ما فرآیندهای کسب‌وکار شما را شناسایی و با ابزارهای هوش مصنوعی خودکار می‌کنیم.",
+    title: "AI Business Automation",
+    icon: "⚙️",
+    heroTitle: "Automate Your Business with AI",
+    heroSubtitle: "Smart automations that eliminate repetitive work and multiply productivity.",
+    problem: "Teams waste countless hours on repetitive tasks like replying, posting, and reporting.",
+    solutionTitle: "AI automations that work like an extra team member",
+    solutionDescription: "We identify and automate your workflows using modern AI tools and integrations.",
     solutionPoints: [
-      "اتوماسیون پاسخگویی و پشتیبانی",
-      "تولید محتوا و پست‌گذاری خودکار",
-      "مدیریت لید و CRM هوشمند",
-      "گزارش‌گیری و تحلیل خودکار",
-      "یکپارچه‌سازی بین ابزارها (Make, Zapier, n8n)"
+      "Customer support and inquiry automation",
+      "Content creation and posting automation",
+      "Smart lead management and follow-ups",
+      "Automated reporting and insights",
+      "Integration with Make, Zapier, n8n and custom APIs"
     ],
     samples: [
-      { title: "اتوماسیون پشتیبانی", client: "فروشگاه آنلاین", result: "کاهش ۷۰٪ زمان پاسخگویی", image: "https://picsum.photos/id/251/800/600" },
-      { title: "اتوماسیون مارکتینگ", client: "آژانس تبلیغاتی", result: "صرفه‌جویی ۴۵ ساعت در هفته", image: "https://picsum.photos/id/1033/800/600" },
+      { title: "Support Automation", client: "E-commerce Store", result: "70% faster response time", image: "https://picsum.photos/id/251/800/600" },
+      { title: "Marketing Automation", client: "Agency", result: "45 hours saved per week", image: "https://picsum.photos/id/1033/800/600" },
     ],
     pricing: [
-      { name: "Normal", price: "۲۲,۹۰۰,۰۰۰", period: "تومان", features: ["۱ جریان اتوماسیون", "راه‌اندازی کامل", "آموزش تیم"] },
-      { name: "Premium", price: "۳۸,۵۰۰,۰۰۰", period: "تومان", features: ["تا ۵ جریان", "AI Agent", "یکپارچه‌سازی پیشرفته", "۳ ماه پشتیبانی"], popular: true },
-      { name: "Max", price: "۶۴,۰۰۰,۰۰۰", period: "تومان", features: ["اتوماسیون کامل سازمانی", "چند AI Agent", "داشبورد مدیریتی", "۶ ماه پشتیبانی و توسعه"] },
+      { name: "Normal", price: "€2,290", period: "one-time", features: ["1 automation flow", "Full setup", "Team training"] },
+      { name: "Premium", price: "€3,850", period: "one-time", features: ["Up to 5 flows", "AI Agent included", "Advanced integrations", "3 months support"], popular: true },
+      { name: "Max", price: "€6,400", period: "one-time", features: ["Full business automation", "Multiple AI agents", "Management dashboard", "6 months support"] },
     ],
-    formTitle: "اتوماسیون AI بیزنس خود را شروع کنید"
+    formTitle: "Automate Your Business"
   }
 ];
 
-export function getServiceBySlug(slug: string): ServiceData | undefined {
-  return aiServices.find(s => s.slug === slug);
+const germanServices: ServiceData[] = englishServices.map(service => ({
+  ...service,
+  title: service.title
+    .replace("AI Landing Page Design", "KI-Landingpage Design")
+    .replace("AI Website Design", "KI-Website Design")
+    .replace("Android & iOS App Design", "Android & iOS App Design")
+    .replace("Web Application Design", "Web App Entwicklung")
+    .replace("AI Instagram Story Design", "KI-Instagram Story Design")
+    .replace("AI Instagram Carousel Design", "KI-Instagram Karussell Design")
+    .replace("AI Avatar Creation", "KI-Avatar Erstellung")
+    .replace("AI Influencer Creation", "KI-Influencer Erstellung")
+    .replace("Social Media Analysis", "Social Media Analyse")
+    .replace("Advertising Campaign & Execution", "Werbekampagnen & Ausführung")
+    .replace("AI Business Automation", "KI Business Automatisierung"),
+  heroTitle: service.heroTitle,
+  heroSubtitle: service.heroSubtitle,
+  problem: service.problem,
+  solutionTitle: service.solutionTitle,
+  solutionDescription: service.solutionDescription,
+  solutionPoints: service.solutionPoints,
+  formTitle: service.formTitle
+}));
+
+export const servicesData = {
+  en: englishServices,
+  de: germanServices
+};
+
+export function getService(slug: string, lang: 'en' | 'de' = 'en'): ServiceData | undefined {
+  const services = servicesData[lang] || servicesData.en;
+  return services.find(s => s.slug === slug);
+}
+
+export function getAllServices(lang: 'en' | 'de' = 'en'): ServiceData[] {
+  return servicesData[lang] || servicesData.en;
 }

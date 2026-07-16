@@ -1,240 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import SectionHeader from '../components/SectionHeader.astro';
 import Button from '../components/Button.astro';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/translations';
+import { getAllServices } from '../data/ai-services';
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url) as 'en' | 'de';
 const t = useTranslations(lang);
-
-const services = [
-  {
-    title: "Brand Strategy & Identity",
-    description: "Positioning, naming, visual identity systems and brand guidelines that scale across markets.",
-    icon: "◐",
-    features: ["Brand positioning", "Visual systems", "Guidelines", "Motion principles"]
-  },
-  {
-    title: "Digital Design & UX",
-    description: "Beautiful, intuitive interfaces for web, apps and complex digital products.",
-    icon: "◈",
-    features: ["Interface design", "Design systems", "User research", "Prototyping"]
-  },
-  {
-    title: "Websites & Digital Products",
-    description: "High-performance websites and digital platforms built for conversion and longevity.",
-    icon: "▣",
-    features: ["Custom websites", "Web apps", "E-commerce", "CMS integration"]
-  },
-  {
-    title: "Creative Campaigns",
-    description: "Integrated campaigns that combine storytelling, digital and physical touchpoints.",
-    icon: "✧",
-    features: ["Campaign strategy", "Creative direction", "Content systems", "Activation"]
-  }
-];
-
-const featuredWork = [
-  {
-    title: "Vesper",
-    client: "Vesper Financial",
-    category: "Branding",
-    description: "Complete rebrand and digital platform for a new generation of European wealth management.",
-    image: "https://picsum.photos/id/1015/1200/800",
-    year: "2025"
-  },
-  {
-    title: "Lumen",
-    client: "Lumen Studio",
-    category: "Digital",
-    description: "Award-winning website and design system for one of Europe’s leading architecture practices.",
-    image: "https://picsum.photos/id/1033/1200/800",
-    year: "2024"
-  },
-  {
-    title: "Aether",
-    client: "Aether Collective",
-    category: "Campaign",
-    description: "Pan-European sustainability campaign across digital, print and physical experiences.",
-    image: "https://picsum.photos/id/1005/1200/800",
-    year: "2024"
-  }
-];
-
-const whyItems = [
-  { key: 'why.1' },
-  { key: 'why.2' },
-  { key: 'why.3' },
-  { key: 'why.4' },
-];
-
-const testimonials = [
-  {
-    quote: "WebNova didn’t just redesign our brand — they helped us understand who we are.",
-    name: "Clara Mendes",
-    role: "CEO, Vesper Financial"
-  },
-  {
-    quote: "The level of craft and strategic thinking is rare. They became true partners.",
-    name: "Thomas Richter",
-    role: "Head of Digital, Lumen"
-  }
-];
+const services = getAllServices(lang).slice(0, 6);
 ---
 
-<Layout title="WebNova — Premium Creative Agency" description="WebNova is a Berlin-based premium creative agency crafting exceptional digital experiences for ambitious brands across Europe.">
+<Layout title="WebNova | Premium Creative AI Agency" description="Premium creative agency based in Berlin. AI-powered design, websites, apps, and automation for ambitious brands across Europe.">
   <!-- Hero -->
-  <section class="relative min-h-[92vh] flex items-center border-b border-zinc-800 overflow-hidden">
-    <div class="max-w-5xl mx-auto px-6 pt-12 pb-20">
-      <div class="max-w-4xl">
-        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-zinc-800 text-sm text-zinc-400 mb-6">
-          Berlin • Europe
-        </div>
-        
-        <h1 class="text-balance mb-6">
-          {t('hero.title')}
-        </h1>
-        
-        <p class="max-w-2xl text-2xl text-zinc-400 mb-10 tracking-[-0.3px]">
-          {t('hero.subtitle')}
-        </p>
-        
-        <div class="flex flex-wrap gap-4">
-          <Button href={getLocalizedPath('/work', lang)} variant="primary" size="lg">
-            {t('hero.cta.primary')}
-          </Button>
-          <Button href={getLocalizedPath('/about', lang)} variant="secondary" size="lg">
-            {t('hero.cta.secondary')}
-          </Button>
-        </div>
+  <section class="pt-24 pb-20 border-b border-zinc-800">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <div class="inline-block px-4 py-1 rounded-full border border-zinc-800 text-xs tracking-[2px] mb-6 text-[#3b82f6]">BERLIN • EUROPE</div>
+      
+      <h1 class="text-7xl md:text-[72px] font-semibold tracking-[-3.5px] leading-[0.9] mb-6">
+        {lang === 'de' ? 'Kreativität trifft KI.' : 'Creativity meets AI.'}
+      </h1>
+      <p class="max-w-2xl mx-auto text-2xl text-zinc-400 mb-10">
+        {lang === 'de' 
+          ? 'Eine Premium Creative Agency aus Berlin. Wir kombinieren menschliche Kreativität mit KI für außergewöhnliche digitale Erlebnisse.' 
+          : 'A premium creative agency from Berlin. We combine human creativity with AI to craft exceptional digital experiences.'}
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={getLocalizedPath('/services', lang)} class="btn btn-primary px-9 py-4 text-base">Explore Services</a>
+        <a href={getLocalizedPath('/contact', lang)} class="btn btn-secondary px-9 py-4 text-base">Book a Call</a>
       </div>
     </div>
-    
-    <!-- Subtle visual accent -->
-    <div class="absolute bottom-0 right-0 w-2/3 h-2/3 bg-gradient-to-tl from-[#3b82f6]/5 to-transparent pointer-events-none"></div>
   </section>
 
-  <!-- Services Preview -->
-  <section class="section max-w-7xl mx-auto px-6">
-    <SectionHeader 
-      title={t('home.services.title')} 
-      subtitle={t('home.services.subtitle')}
-      align="left"
-    />
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {services.map(service => (
-        <ServiceCard 
-          title={service.title} 
-          description={service.description}
-          icon={service.icon}
-          features={service.features}
-        />
-      ))}
-    </div>
-    
-    <div class="mt-10 text-center">
-      <Button href={getLocalizedPath('/services', lang)} variant="secondary">
-        {t('common.learnMore')} →
-      </Button>
-    </div>
-  </section>
-
-  <!-- Featured Work -->
-  <section class="section max-w-7xl mx-auto px-6 border-t border-zinc-800">
+  <!-- Services Teaser -->
+  <section class="max-w-6xl mx-auto px-6 py-20">
     <div class="flex items-end justify-between mb-10">
-      <SectionHeader 
-        title={t('home.work.title')} 
-        subtitle={t('home.work.subtitle')}
-        align="left"
-      />
-      <div class="hidden md:block">
-        <Button href={getLocalizedPath('/work', lang)} variant="ghost">
-          {t('common.viewAll')} →
-        </Button>
+      <div>
+        <div class="text-[#3b82f6] text-sm tracking-[2px] mb-2">WHAT WE OFFER</div>
+        <h2 class="text-4xl font-semibold tracking-tight">AI-Powered Services</h2>
       </div>
+      <a href={getLocalizedPath('/services', lang)} class="hidden md:block text-sm text-[#3b82f6]">View all services →</a>
     </div>
-    
+
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {featuredWork.map(project => (
-        <ProjectCard 
-          title={project.title}
-          client={project.client}
-          category={project.category}
-          description={project.description}
-          image={project.image}
-          year={project.year}
-          href={getLocalizedPath('/work', lang)}
-        />
+      {services.map(service => (
+        <a href={getLocalizedPath(`/services/${service.slug}`, lang)} class="group border border-zinc-800 p-8 rounded-3xl hover:border-[#3b82f6] transition-all">
+          <div class="text-3xl mb-6">{service.icon}</div>
+          <h3 class="font-semibold text-xl mb-3 group-hover:text-[#3b82f6]">{service.title}</h3>
+          <p class="text-zinc-400 text-[15px] leading-relaxed line-clamp-3">{service.heroSubtitle}</p>
+        </a>
       ))}
-    </div>
-    
-    <div class="md:hidden mt-8">
-      <Button href={getLocalizedPath('/work', lang)} variant="secondary" class="w-full justify-center">
-        {t('common.viewAll')}
-      </Button>
     </div>
   </section>
 
   <!-- Why WebNova -->
-  <section class="section bg-[#111113] border-y border-zinc-800">
-    <div class="max-w-7xl mx-auto px-6">
-      <SectionHeader 
-        title={t('home.why.title')} 
-        subtitle={t('home.why.subtitle')}
-        align="left"
-      />
+  <section class="bg-[#111113] py-20 border-y border-zinc-800">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <div class="text-[#3b82f6] text-sm tracking-[2px] mb-3">WHY WEBNOVA</div>
+        <h2 class="text-4xl font-semibold tracking-tight">The best of both worlds</h2>
+      </div>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {whyItems.map((item, index) => {
-          const title = t(`${item.key}.title` as any);
-          const desc = t(`${item.key}.desc` as any);
-          return (
-            <div class="p-8 border border-zinc-800 rounded-2xl bg-[#0a0a0b]">
-              <div class="text-[#3b82f6] text-4xl font-light mb-4 tracking-tighter">0{index + 1}</div>
-              <h3 class="font-semibold text-xl mb-3">{title}</h3>
-              <p class="text-zinc-400 text-[15px] leading-relaxed">{desc}</p>
-            </div>
-          );
-        })}
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card p-8">
+          <div class="text-3xl mb-4">✦</div>
+          <h3 class="font-semibold text-xl mb-3">Human Craft</h3>
+          <p class="text-zinc-400">Every project is led by senior creatives who care deeply about quality and detail.</p>
+        </div>
+        <div class="card p-8">
+          <div class="text-3xl mb-4">✦</div>
+          <h3 class="font-semibold text-xl mb-3">AI Acceleration</h3>
+          <p class="text-zinc-400">We use AI to move faster without compromising on quality or originality.</p>
+        </div>
+        <div class="card p-8">
+          <div class="text-3xl mb-4">✦</div>
+          <h3 class="font-semibold text-xl mb-3">European Standards</h3>
+          <p class="text-zinc-400">Based in Berlin with a deep understanding of EU markets and culture.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="section max-w-5xl mx-auto px-6">
-    <SectionHeader 
-      title={t('home.testimonials.title')} 
-      align="center"
-    />
-    
-    <div class="grid md:grid-cols-2 gap-6">
-      {testimonials.map(testimonial => (
-        <div class="card p-9 rounded-2xl">
-          <div class="text-4xl text-[#3b82f6] mb-6">“</div>
-          <blockquote class="text-xl leading-tight mb-8 text-balance">
-            {testimonial.quote}
-          </blockquote>
-          <div>
-            <div class="font-medium">{testimonial.name}</div>
-            <div class="text-sm text-zinc-400">{testimonial.role}</div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="border-t border-zinc-800 py-20">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-5xl font-semibold tracking-[-1.5px] mb-4">{t('home.cta.title')}</h2>
-      <p class="text-xl text-zinc-400 mb-10">{t('home.cta.subtitle')}</p>
-      
-      <Button href={getLocalizedPath('/contact', lang)} variant="primary" size="lg">
-        {t('nav.getInTouch')}
-      </Button>
+  <!-- CTA -->
+  <section class="py-20 text-center">
+    <div class="max-w-xl mx-auto px-6">
+      <h2 class="text-4xl font-semibold tracking-tight mb-6">Ready to build something exceptional?</h2>
+      <a href={getLocalizedPath('/contact', lang)} class="btn btn-primary px-10 py-4 text-lg">Start a Conversation</a>
     </div>
   </section>
 </Layout>

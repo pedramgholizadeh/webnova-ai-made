@@ -1,0 +1,16 @@
+---
+import ServiceLanding from '../../../components/ServiceLanding.astro';
+import { getAllServices } from '../../../data/ai-services';
+
+export async function getStaticPaths() {
+  const services = getAllServices('de');
+  return services.map(service => ({
+    params: { slug: service.slug },
+    props: { service, lang: 'de' }
+  }));
+}
+
+const { service, lang } = Astro.props;
+---
+
+<ServiceLanding service={service} lang={lang} />

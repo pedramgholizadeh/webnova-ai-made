@@ -1,19 +1,17 @@
 ---
 import ServiceLanding from '../../components/ServiceLanding.astro';
-import { aiServices, getServiceBySlug } from '../../data/ai-services';
+import { getAllServices } from '../../data/ai-services';
+import { getLangFromUrl } from '../../i18n/translations';
 
 export async function getStaticPaths() {
-  return aiServices.map(service => ({
+  const services = getAllServices('en');
+  return services.map(service => ({
     params: { slug: service.slug },
-    props: { service }
+    props: { service, lang: 'en' }
   }));
 }
 
-const { service } = Astro.props;
-
-if (!service) {
-  return Astro.redirect('/services');
-}
+const { service, lang } = Astro.props;
 ---
 
-<ServiceLanding service={service} />
+<ServiceLanding service={service} lang={lang} />

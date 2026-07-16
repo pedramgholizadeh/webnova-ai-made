@@ -1,5 +1,6 @@
 ---
 import { getLocalizedPath, type Lang, useTranslations } from '../i18n/translations';
+import { getAllServices } from '../data/ai-services';
 
 interface Props {
   lang: Lang;
@@ -7,12 +8,14 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const services = getAllServices(lang);
 
 const year = new Date().getFullYear();
 
 const footerLinks = [
   { href: getLocalizedPath('/about', lang), label: t('nav.about') },
   { href: getLocalizedPath('/services', lang), label: t('nav.services') },
+  { href: getLocalizedPath('/team', lang), label: lang === 'de' ? 'Team' : 'Team' },
   { href: getLocalizedPath('/work', lang), label: t('nav.work') },
   { href: getLocalizedPath('/contact', lang), label: t('nav.contact') },
 ];
@@ -22,7 +25,7 @@ const footerLinks = [
   <div class="max-w-7xl mx-auto px-6 pt-12 pb-8">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-y-10 gap-x-8">
       <!-- Brand -->
-      <div class="md:col-span-5">
+      <div class="md:col-span-4">
         <div class="flex items-center gap-2 mb-4">
           <div class="w-7 h-7 bg-[#3b82f6] rounded flex items-center justify-center">
             <span class="text-white font-bold text-lg tracking-tighter">W</span>
@@ -31,12 +34,12 @@ const footerLinks = [
         </div>
         <p class="text-sm text-zinc-400 max-w-xs">
           Premium creative agency.<br />
-          Berlin, Germany — Europe.
+          Berlin, Germany — expanding across the EU.
         </p>
       </div>
 
-      <!-- Links -->
-      <div class="md:col-span-3">
+      <!-- Navigation -->
+      <div class="md:col-span-2">
         <div class="text-xs uppercase tracking-[1px] text-zinc-500 mb-4 font-medium">Navigate</div>
         <ul class="space-y-2 text-sm">
           {footerLinks.map(link => (
@@ -45,13 +48,29 @@ const footerLinks = [
         </ul>
       </div>
 
-      <!-- Contact info -->
-      <div class="md:col-span-4 text-sm">
+      <!-- Services -->
+      <div class="md:col-span-3">
+        <div class="text-xs uppercase tracking-[1px] text-zinc-500 mb-4 font-medium">Services</div>
+        <ul class="grid grid-cols-1 gap-y-1.5 text-sm">
+          {services.slice(0, 6).map(service => (
+            <li>
+              <a href={getLocalizedPath(`/services/${service.slug}`, lang)} class="text-zinc-400 hover:text-white flex items-center gap-2">
+                <span>{service.icon}</span>
+                <span class="truncate">{service.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={getLocalizedPath('/services', lang)} class="text-xs text-[#3b82f6] mt-3 inline-block hover:underline">All services →</a>
+      </div>
+
+      <!-- Contact -->
+      <div class="md:col-span-3 text-sm">
         <div class="text-xs uppercase tracking-[1px] text-zinc-500 mb-4 font-medium">Berlin</div>
         <div class="space-y-1 text-zinc-400">
           <div>Torstraße 1</div>
           <div>10119 Berlin, Germany</div>
-          <div class="pt-1">
+          <div class="pt-2">
             <a href="mailto:hello@webnova.studio" class="hover:text-white">hello@webnova.studio</a>
           </div>
           <div>+49 30 123 4567</div>

@@ -1,30 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
-import { aiServices } from '../data/ai-services';
+import { getAllServices } from '../data/ai-services';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url) as 'en' | 'de';
+const t = useTranslations(lang);
+const services = getAllServices(lang);
 ---
 
 <Layout 
-  title="خدمات هوش مصنوعی | وب‌نوا" 
-  description="طراحی لندینگ پیج، سایت، اپلیکیشن، استوری اینستاگرام، آواتار AI، اینفلوئنسر مجازی و اتوماسیون با هوش مصنوعی"
+  title={lang === 'de' ? "Unsere KI-Services | WebNova" : "Our AI Services | WebNova"} 
+  description="AI-powered creative services: Landing pages, websites, apps, Instagram content, avatars, automation and more."
 >
   <div class="max-w-6xl mx-auto px-6 pt-16 pb-20">
-    <!-- Header -->
     <div class="max-w-3xl mb-14">
-      <div class="text-[#3b82f6] tracking-[2px] text-sm mb-3">AI-POWERED SERVICES</div>
-      <h1 class="text-6xl font-semibold tracking-[-1.8px] mb-4">خدمات هوش مصنوعی ما</h1>
+      <div class="text-[#3b82f6] tracking-[2px] text-sm mb-3">AI SERVICES</div>
+      <h1 class="text-6xl font-semibold tracking-[-1.8px] mb-4">
+        {lang === 'de' ? 'Unsere KI-gestützten Services' : 'Our AI-Powered Services'}
+      </h1>
       <p class="text-2xl text-zinc-400">
-        از طراحی تا اجرا — همه چیز با ترکیب خلاقیت انسانی و قدرت هوش مصنوعی
+        {lang === 'de' 
+          ? 'Von Design bis Automatisierung — alles mit menschlicher Kreativität und KI-Power.' 
+          : 'From design to automation — combining human creativity with the power of AI.'}
       </p>
     </div>
 
-    <!-- Services Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {aiServices.map(service => (
+      {services.map(service => (
         <a 
-          href={`/services/${service.slug}`} 
-          class="group card p-8 rounded-3xl flex flex-col hover:border-[#3b82f6] transition-colors"
+          href={getLocalizedPath(`/services/${service.slug}`, lang)} 
+          class="group card p-8 rounded-3xl flex flex-col hover:border-[#3b82f6] transition-all"
         >
+          <div class="text-4xl mb-6">{service.icon}</div>
+          
           <div class="flex-1">
             <h3 class="text-2xl font-semibold tracking-tight mb-4 group-hover:text-[#3b82f6] transition-colors">
               {service.title}
@@ -34,18 +43,20 @@ import { aiServices } from '../data/ai-services';
             </p>
           </div>
 
-          <div class="flex items-center justify-between pt-6 border-t border-zinc-800 text-sm font-medium">
-            <span class="text-[#3b82f6]">مشاهده جزئیات و قیمت →</span>
-            <span class="text-zinc-500 group-hover:text-white transition-colors">از {service.pricing[0].price} تومان</span>
+          <div class="pt-6 border-t border-zinc-800 text-sm font-medium flex justify-between items-center">
+            <span class="text-[#3b82f6]">Learn more →</span>
+            <span class="text-zinc-500">from {service.pricing[0].price}</span>
           </div>
         </a>
       ))}
     </div>
 
     <div class="mt-16 text-center border-t border-zinc-800 pt-12">
-      <p class="text-lg text-zinc-400 mb-6">نمی‌دانید کدام سرویس برای شما مناسب است؟</p>
-      <Button href="/contact" variant="primary" size="lg">
-        مشاوره رایگان بگیرید
+      <p class="text-lg text-zinc-400 mb-6">
+        {lang === 'de' ? 'Nicht sicher, welcher Service zu dir passt?' : "Not sure which service is right for you?"}
+      </p>
+      <Button href={getLocalizedPath('/contact', lang)} variant="primary" size="lg">
+        {lang === 'de' ? 'Kostenlose Beratung buchen' : 'Get Free Consultation'}
       </Button>
     </div>
   </div>

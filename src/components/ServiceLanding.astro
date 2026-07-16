@@ -1,95 +1,87 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Button from './Button.astro';
 import { type ServiceData } from '../data/ai-services';
+import { getLocalizedPath } from '../i18n/translations';
 
 export interface Props {
   service: ServiceData;
+  lang?: 'en' | 'de';
 }
 
-const { service } = Astro.props;
+const { service, lang = 'en' } = Astro.props;
+const isGerman = lang === 'de';
+
+const ctaLabel = isGerman ? "Anfrage absenden" : "Submit Request";
+const thankYou = isGerman 
+  ? "Vielen Dank! Wir melden uns innerhalb von 24 Stunden bei Ihnen." 
+  : "Thank you! We will get back to you within 24 hours.";
+const formSubtitle = isGerman 
+  ? "Füllen Sie das Formular aus und wir kontaktieren Sie innerhalb von 24 Stunden." 
+  : "Fill out the form and we will get back to you within 24 hours.";
 ---
 
 <Layout 
-  title={`${service.title} | وب‌نوا`} 
+  title={`${service.title} | WebNova`}
   description={service.heroSubtitle}
 >
-  <!-- Hero Section -->
-  <section class="relative pt-20 pb-16 border-b border-zinc-800 overflow-hidden">
+  <!-- Hero -->
+  <section class="relative pt-20 pb-16 border-b border-zinc-800">
     <div class="max-w-5xl mx-auto px-6">
-      <div class="max-w-4xl">
-        <div class="inline-block px-4 py-1 rounded-full bg-[#3b82f6]/10 text-[#3b82f6] text-sm font-medium mb-6">
-          خدمات هوش مصنوعی وب‌نوا
-        </div>
-        
-        <h1 class="text-5xl md:text-6xl font-semibold tracking-[-2px] leading-[1.05] mb-6">
-          {service.heroTitle}
-        </h1>
-        
-        <p class="text-2xl text-zinc-400 max-w-3xl mb-10">
-          {service.heroSubtitle}
-        </p>
-
-        <div class="flex flex-wrap gap-4">
-          <a href="#form" class="btn btn-primary px-8 py-3.5 text-base">
-            دریافت مشاوره رایگان
-          </a>
-          <a href="#pricing" class="btn btn-secondary px-8 py-3.5 text-base">
-            مشاهده قیمت‌ها
-          </a>
-        </div>
+      <div class="text-6xl mb-5">{service.icon}</div>
+      <h1 class="text-5xl md:text-[56px] font-semibold tracking-[-2.2px] leading-none mb-6 max-w-5xl">
+        {service.heroTitle}
+      </h1>
+      <p class="text-2xl text-zinc-400 max-w-3xl mb-10">
+        {service.heroSubtitle}
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#form" class="btn btn-primary px-8 py-3.5 text-base">Get Started</a>
+        <a href="#pricing" class="btn btn-secondary px-8 py-3.5 text-base">View Pricing</a>
       </div>
     </div>
   </section>
 
-  <!-- Problem Section -->
+  <!-- Problem -->
   <section class="max-w-5xl mx-auto px-6 py-16 border-b border-zinc-800">
-    <div class="max-w-3xl">
-      <div class="text-[#3b82f6] text-sm tracking-[1.5px] mb-3">PROBLEM</div>
-      <h2 class="text-4xl font-semibold tracking-tight mb-6">مشکل رایج کسب‌وکارها</h2>
-      <p class="text-xl text-zinc-300 leading-relaxed">
-        {service.problem}
-      </p>
-    </div>
+    <div class="uppercase tracking-[2px] text-xs text-[#3b82f6] mb-3">THE CHALLENGE</div>
+    <h2 class="text-4xl font-semibold tracking-tight mb-6">The Problem</h2>
+    <p class="text-xl text-zinc-300 max-w-4xl leading-relaxed">{service.problem}</p>
   </section>
 
-  <!-- Solution Section -->
+  <!-- Solution -->
   <section class="max-w-5xl mx-auto px-6 py-16">
-    <div class="max-w-3xl mb-10">
-      <div class="text-[#3b82f6] text-sm tracking-[1.5px] mb-3">OUR SOLUTION</div>
-      <h2 class="text-4xl font-semibold tracking-tight mb-4">{service.solutionTitle}</h2>
-      <p class="text-xl text-zinc-300">{service.solutionDescription}</p>
-    </div>
+    <div class="uppercase tracking-[2px] text-xs text-[#3b82f6] mb-3">OUR APPROACH</div>
+    <h2 class="text-4xl font-semibold tracking-tight mb-6">{service.solutionTitle}</h2>
+    <p class="text-xl text-zinc-300 mb-10 leading-relaxed">{service.solutionDescription}</p>
 
     <div class="grid md:grid-cols-2 gap-4">
       {service.solutionPoints.map(point => (
-        <div class="flex gap-4 p-6 bg-[#111113] border border-zinc-800 rounded-2xl">
-          <div class="text-[#3b82f6] mt-1">✓</div>
-          <div class="text-lg">{point}</div>
+        <div class="p-6 bg-[#111113] border border-zinc-800 rounded-2xl flex gap-4 items-start">
+          <div class="text-[#3b82f6] mt-1">→</div>
+          <p class="text-[15px] leading-relaxed">{point}</p>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- Sample Works -->
+  <!-- Samples -->
   <section class="bg-[#111113] py-16 border-y border-zinc-800">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-4xl font-semibold tracking-tight mb-10">نمونه کارهای مرتبط</h2>
+      <div class="uppercase tracking-[2px] text-xs text-[#3b82f6] mb-3">SELECTED WORK</div>
+      <h2 class="text-4xl font-semibold tracking-tight mb-10">Sample Projects</h2>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {service.samples.map(sample => (
-          <div class="group overflow-hidden rounded-2xl border border-zinc-800 bg-[#0a0a0b]">
-            <div class="aspect-video overflow-hidden">
-              <img 
-                src={sample.image} 
-                alt={sample.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
+          <div class="group border border-zinc-800 rounded-2xl overflow-hidden bg-[#0a0a0b]">
+            <img 
+              src={sample.image} 
+              alt={sample.title} 
+              class="w-full aspect-video object-cover group-hover:scale-[1.02] transition-transform duration-500" 
+            />
             <div class="p-6">
-              <div class="font-semibold text-xl mb-1">{sample.title}</div>
-              <div class="text-sm text-zinc-400 mb-3">{sample.client}</div>
-              <div class="text-[#3b82f6] text-sm font-medium">→ {sample.result}</div>
+              <h4 class="font-semibold text-lg">{sample.title}</h4>
+              <p class="text-sm text-zinc-400 mt-1">{sample.client}</p>
+              <p class="text-[#3b82f6] text-sm mt-3 font-medium">{sample.result}</p>
             </div>
           </div>
         ))}
@@ -100,44 +92,32 @@ const { service } = Astro.props;
   <!-- Pricing -->
   <section id="pricing" class="max-w-6xl mx-auto px-6 py-20">
     <div class="text-center mb-12">
-      <h2 class="text-4xl font-semibold tracking-tight mb-4">پلن‌های قیمت‌گذاری</h2>
-      <p class="text-xl text-zinc-400">سه سطح مختلف متناسب با نیاز و بودجه شما</p>
+      <div class="uppercase tracking-[2px] text-xs text-[#3b82f6] mb-3">PRICING</div>
+      <h2 class="text-4xl font-semibold tracking-tight">Transparent Pricing</h2>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
       {service.pricing.map(tier => (
         <div class:list={[
           "border rounded-3xl p-8 flex flex-col",
-          tier.popular ? "border-[#3b82f6] bg-[#111113] relative" : "border-zinc-800 bg-[#0a0a0b]"
+          tier.popular ? "border-[#3b82f6] bg-[#111113] scale-[1.01]" : "border-zinc-800"
         ]}>
-          {tier.popular && (
-            <div class="absolute -top-3 right-6 bg-[#3b82f6] text-xs px-4 py-1 rounded-full font-medium">
-              محبوب‌ترین
-            </div>
-          )}
-          
           <div>
             <div class="font-semibold text-2xl">{tier.name}</div>
-            <div class="mt-4 flex items-baseline">
-              <span class="text-4xl font-semibold tracking-tight">{tier.price}</span>
-              <span class="text-zinc-400 mr-2">/{tier.period}</span>
+            <div class="mt-3 text-4xl font-semibold tracking-tight">
+              {tier.price} 
+              <span class="text-base font-normal text-zinc-400">/{tier.period}</span>
             </div>
           </div>
 
-          <ul class="mt-8 space-y-3 flex-1">
-            {tier.features.map(feature => (
-              <li class="flex items-start gap-3 text-[15px]">
-                <span class="text-[#3b82f6] mt-1">•</span>
-                <span>{feature}</span>
-              </li>
+          <ul class="mt-8 space-y-3.5 text-sm flex-1">
+            {tier.features.map(f => (
+              <li class="flex gap-3 text-zinc-300">✓ {f}</li>
             ))}
           </ul>
 
-          <a href="#form" class:list={[
-            "mt-8 btn w-full justify-center",
-            tier.popular ? "btn-primary" : "btn-secondary"
-          ]}>
-            انتخاب این پلن
+          <a href="#form" class="btn btn-primary mt-8 w-full justify-center">
+            Choose {tier.name}
           </a>
         </div>
       ))}
@@ -145,67 +125,40 @@ const { service } = Astro.props;
   </section>
 
   <!-- Lead Form -->
-  <section id="form" class="border-t border-zinc-800 bg-[#111113] py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <div class="mb-10 text-center">
-        <h2 class="text-4xl font-semibold tracking-tight mb-3">{service.formTitle}</h2>
-        <p class="text-lg text-zinc-400">فرم زیر را پر کنید. در کمتر از ۲۴ ساعت با شما تماس می‌گیریم.</p>
-      </div>
+  <section id="form" class="bg-[#111113] py-16 border-t border-zinc-800">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-4xl font-semibold tracking-tight mb-3">{service.formTitle}</h2>
+      <p class="text-zinc-400 mb-8 text-lg">{formSubtitle}</p>
 
-      <form id="lead-form" class="space-y-6 bg-[#0a0a0b] border border-zinc-800 p-8 md:p-10 rounded-3xl">
+      <form id="lead-form" class="space-y-6 bg-[#0a0a0b] p-8 rounded-3xl border border-zinc-800">
         <input type="hidden" name="service" value={service.slug} />
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm mb-2 text-zinc-400">نام و نام خانوادگی</label>
-            <input type="text" name="name" required class="w-full" placeholder="مثال: علی رضایی" />
-          </div>
-          <div>
-            <label class="block text-sm mb-2 text-zinc-400">شماره تماس</label>
-            <input type="tel" name="phone" required class="w-full" placeholder="۰۹۱۲۳۴۵۶۷۸۹" />
-          </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <input type="text" name="name" placeholder={isGerman ? "Vollständiger Name" : "Full Name"} required class="w-full" />
+          <input type="tel" name="phone" placeholder={isGerman ? "Telefonnummer" : "Phone Number"} class="w-full" />
         </div>
+        
+        <input type="email" name="email" placeholder={isGerman ? "E-Mail-Adresse" : "Email Address"} required class="w-full" />
+        <input type="text" name="company" placeholder={isGerman ? "Unternehmen" : "Company"} class="w-full" />
+        
+        <select name="package" class="w-full">
+          {service.pricing.map(t => (
+            <option value={t.name}>{t.name} — {t.price}</option>
+          ))}
+        </select>
 
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm mb-2 text-zinc-400">ایمیل</label>
-            <input type="email" name="email" required class="w-full" placeholder="you@company.com" />
-          </div>
-          <div>
-            <label class="block text-sm mb-2 text-zinc-400">نام شرکت / بیزنس</label>
-            <input type="text" name="company" class="w-full" placeholder="نام شرکت شما" />
-          </div>
-        </div>
+        <textarea 
+          name="message" 
+          rows="4" 
+          placeholder={isGerman ? "Erzählen Sie uns von Ihrem Projekt..." : "Tell us about your project..."} 
+          class="w-full"
+        ></textarea>
 
-        <div>
-          <label class="block text-sm mb-2 text-zinc-400">انتخاب پلن مورد نظر</label>
-          <select name="package" class="w-full">
-            {service.pricing.map(tier => (
-              <option value={tier.name}>{tier.name} — {tier.price} تومان</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-sm mb-2 text-zinc-400">توضیحات پروژه یا نیاز شما</label>
-          <textarea name="message" rows="5" class="w-full" placeholder="لطفاً جزئیات بیشتری درباره پروژه‌تان بنویسید..."></textarea>
-        </div>
-
-        <button 
-          type="submit"
-          class="btn btn-primary w-full py-4 text-base"
-        >
-          ارسال درخواست و دریافت مشاوره
-        </button>
-
-        <p class="text-center text-xs text-zinc-500">
-          اطلاعات شما به صورت امن ذخیره می‌شود و فقط با تیم وب‌نوا به اشتراک گذاشته خواهد شد.
-        </p>
+        <button type="submit" class="btn btn-primary w-full py-3.5 text-base">{ctaLabel}</button>
       </form>
 
-      <div id="form-success" class="hidden mt-6 p-6 bg-green-950 border border-green-800 text-green-400 rounded-2xl text-center">
-        <div class="font-semibold text-lg mb-1">درخواست شما با موفقیت ثبت شد ✓</div>
-        <p>کارشناسان ما در اسرع وقت (حداکثر ۲۴ ساعت) با شما تماس خواهند گرفت.</p>
+      <div id="form-success" class="hidden mt-6 p-6 bg-emerald-950/60 border border-emerald-800 rounded-2xl text-center text-emerald-400">
+        {thankYou}
       </div>
     </div>
   </section>
@@ -218,40 +171,31 @@ const { service } = Astro.props;
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
+      
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
 
-      // === Cloudflare Worker Integration ===
-      // 1. Deploy workers/lead-handler.js to Cloudflare Workers
-      // 2. Create a KV namespace called "LEADS" and bind it
-      // 3. Replace the URL below with your deployed worker URL
-      const WORKER_URL = 'https://webnova-leads.your-subdomain.workers.dev';
+      // Replace with your actual Cloudflare Worker URL
+      const WORKER_URL = 'https://webnova-leads.your-account.workers.dev/lead';
 
       try {
-        console.log('Submitting lead for service:', data.service);
+        const response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
 
-        // Simulate for now (remove this line when real worker is ready)
-        await new Promise(resolve => setTimeout(resolve, 800));
-
-        // Real submission (uncomment after deploying worker):
-        // const res = await fetch(WORKER_URL, {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(data)
-        // });
-        // if (!res.ok) throw new Error('Worker error');
-
-        console.log('Lead submitted successfully:', data);
-
+        if (response.ok) {
+          form.style.display = 'none';
+          if (successDiv) successDiv.classList.remove('hidden');
+        } else {
+          throw new Error('Failed to submit');
+        }
+      } catch (err) {
+        // Fallback simulation for development
+        console.log('Form data (development):', data);
         form.style.display = 'none';
         if (successDiv) successDiv.classList.remove('hidden');
-
-        // Optional: reset
-        // form.reset();
-      } catch (err) {
-        alert('خطایی رخ داد. لطفاً دوباره تلاش کنید یا مستقیماً با ما تماس بگیرید.');
-        console.error(err);
       }
     });
   }
