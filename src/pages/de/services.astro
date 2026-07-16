@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const services = [
+  {
+    title: "Markenstrategie & Identität",
+    description: "Wir helfen ambitionierten Marken dabei, zu definieren, wer sie sind und wie sie sich in der Welt präsentieren – kulturübergreifend und kanalübergreifend.",
+    icon: "◐",
+    details: "Brand Audits • Positionierung • Naming • Visuelle Identitätssysteme • Markenarchitektur • Guidelines & Playbooks"
+  },
+  {
+    title: "Digital Design & UX",
+    description: "Weltklasse digitale Erlebnisse. Wir gestalten Interfaces, die unvermeidlich und freudvoll zu nutzen sind.",
+    icon: "◈",
+    details: "User Research • Interface Design • Designsysteme • Prototyping • Barrierefreiheit • Design Operations"
+  },
+  {
+    title: "Websites & Digitale Produkte",
+    description: "Schnelle, schöne und konversionsstarke Websites und Produkte, die so hart arbeiten wie Ihr Team.",
+    icon: "▣",
+    details: "Custom Development • Webflow & Custom CMS • E-Commerce • Web-Applikationen • Performance-Optimierung"
+  },
+  {
+    title: "Kreative Kampagnen",
+    description: "Integrierte Kampagnen, die durch den Lärm dringen und bleibende kulturelle Wirkung erzeugen.",
+    icon: "✧",
+    details: "Kampagnenstrategie • Kreative Leitung • Content-Systeme • 360°-Aktivierungen • Mess-Frameworks"
+  },
+  {
+    title: "Motion Design & 3D",
+    description: "Marken zum Leben erwecken durch Motion, Film und räumliche Erlebnisse.",
+    icon: "◉",
+    details: "Motion-Systeme • 3D & CGI • Brand Films • Interaktive Installationen • Produktvisualisierung"
+  },
+  {
+    title: "Kreativberatung",
+    description: "Strategische Beratung für interne Teams und Führungskräfte zu Design, Marke und digitaler Transformation.",
+    icon: "◎",
+    details: "Brand & Design Audits • Kreative Führungsunterstützung • Team-Workshops • Capability Building"
+  }
+];
+---
+
+<Layout title="Leistungen" description="Umfassende kreative Dienstleistungen: Markenstrategie, Digital Design, Websites, Kampagnen, Motion und Kreativberatung.">
+  <div class="max-w-6xl mx-auto px-6 pt-16 pb-24">
+    <div class="max-w-2xl mb-14">
+      <h1 class="text-6xl font-semibold tracking-[-1.8px] mb-4">{t('services.title')}</h1>
+      <p class="text-2xl text-zinc-400">{t('services.subtitle')}</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {services.map((service) => (
+        <div class="card p-9 rounded-3xl flex flex-col">
+          <div class="text-4xl mb-8 text-[#3b82f6]">{service.icon}</div>
+          <h3 class="text-3xl font-semibold tracking-tight mb-4">{service.title}</h3>
+          <p class="text-lg text-zinc-400 mb-6 flex-grow">{service.description}</p>
+          
+          <div class="text-sm text-zinc-400 border-t border-zinc-800 pt-6 mt-auto">
+            {service.details}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 text-center">
+      <Button href={getLocalizedPath('/contact', lang)} variant="primary" size="lg">
+        {t('services.cta')}
+      </Button>
+    </div>
+  </div>
+</Layout>

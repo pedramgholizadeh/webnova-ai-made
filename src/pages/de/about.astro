@@ -1,0 +1,108 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Button from '../../components/Button.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const values = [
+  { key: 'value.clarity', desc: 'Wir eliminieren Rauschen. Jede Entscheidung dient der Klarheit und dem Zweck.' },
+  { key: 'value.craft', desc: 'Wir glauben, dass die Details der Ort sind, an dem Exzellenz lebt.' },
+  { key: 'value.cultural', desc: 'Wir gestalten mit tiefem Respekt für die Märkte, die wir bedienen.' },
+  { key: 'value.partnership', desc: 'Wir investieren in langfristige Beziehungen statt kurzfristiger Erfolge.' },
+];
+
+const team = [
+  { key: 'team.anna', image: 'https://picsum.photos/id/1005/400/400' },
+  { key: 'team.max', image: 'https://picsum.photos/id/1011/400/400' },
+  { key: 'team.sofia', image: 'https://picsum.photos/id/1009/400/400' },
+  { key: 'team.julian', image: 'https://picsum.photos/id/201/400/400' },
+];
+
+const locations = [
+  { city: 'Berlin', country: 'Deutschland', status: 'Hauptsitz' },
+  { city: 'Paris', country: 'Frankreich', status: '2026' },
+  { city: 'Amsterdam', country: 'Niederlande', status: '2026' },
+];
+---
+
+<Layout title="Über uns" description="Erfahren Sie mehr über WebNova, eine Premium-Kreativagentur aus Berlin. Unsere Geschichte, Werte, das Team und die Expansion in Europa.">
+  <div class="max-w-5xl mx-auto px-6 pt-16 pb-24">
+    <div class="max-w-3xl mb-16">
+      <div class="text-sm text-[#3b82f6] tracking-[2px] mb-2">GEGR. 2021 • BERLIN</div>
+      <h1 class="text-6xl font-semibold tracking-[-2px] mb-4">{t('about.title')}</h1>
+      <p class="text-2xl text-zinc-400">{t('about.subtitle')}</p>
+    </div>
+
+    <!-- Story -->
+    <div class="grid md:grid-cols-12 gap-x-12 mb-20">
+      <div class="md:col-span-5 mb-8 md:mb-0">
+        <h2 class="text-3xl font-semibold tracking-tight mb-6">{t('about.story.title')}</h2>
+      </div>
+      <div class="md:col-span-7 space-y-5 text-[17px] text-zinc-300 leading-relaxed">
+        <p>{t('about.story.p1')}</p>
+        <p>{t('about.story.p2')}</p>
+      </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="mb-20 border-l-2 border-[#3b82f6] pl-8 max-w-3xl">
+      <h3 class="font-semibold text-lg mb-3 text-[#3b82f6]">{t('about.mission.title')}</h3>
+      <p class="text-xl text-zinc-300">{t('about.mission.text')}</p>
+    </div>
+
+    <!-- Values -->
+    <div class="mb-20">
+      <h2 class="text-3xl font-semibold tracking-tight mb-8">{t('about.values.title')}</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {values.map((v, i) => (
+          <div class="p-8 border border-zinc-800 rounded-2xl bg-[#111113]">
+            <div class="font-semibold text-xl mb-2">{t(v.key as any)}</div>
+            <p class="text-zinc-400">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Team -->
+    <div class="mb-20">
+      <h2 class="text-3xl font-semibold tracking-tight mb-8">{t('about.team.title')}</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {team.map(member => {
+          const name = t(`${member.key}.name` as any);
+          const role = t(`${member.key}.role` as any);
+          const bio = t(`${member.key}.bio` as any);
+          return (
+            <div>
+              <div class="aspect-square mb-5 rounded-2xl overflow-hidden border border-zinc-800">
+                <img src={member.image} alt={name} class="w-full h-full object-cover" />
+              </div>
+              <div class="font-semibold text-lg">{name}</div>
+              <div class="text-sm text-[#3b82f6] mb-2">{role}</div>
+              <p class="text-sm text-zinc-400">{bio}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Locations -->
+    <div>
+      <h2 class="text-3xl font-semibold tracking-tight mb-8">{t('about.locations.title')}</h2>
+      <div class="grid sm:grid-cols-3 gap-6 text-lg">
+        {locations.map(loc => (
+          <div class="p-8 rounded-2xl border border-zinc-800">
+            <div class="font-semibold">{loc.city}</div>
+            <div class="text-zinc-400">{loc.country}</div>
+            <div class="mt-6 text-sm text-[#3b82f6]">{loc.status}</div>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-sm text-zinc-400 max-w-md">
+        Expansion in der EU. Interessiert an einem neuen Standort? Sprechen Sie mit uns.
+      </p>
+    </div>
+  </div>
+</Layout>

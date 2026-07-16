@@ -1,0 +1,239 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Button from '../../components/Button.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url); // will be 'de'
+const t = useTranslations(lang);
+
+const services = [
+  {
+    title: "Markenstrategie & Identität",
+    description: "Positionierung, Naming, visuelle Identitätssysteme und Markenrichtlinien, die über Märkte hinweg skalieren.",
+    icon: "◐",
+    features: ["Markenpositionierung", "Visuelle Systeme", "Guidelines", "Motion Prinzipien"]
+  },
+  {
+    title: "Digital Design & UX",
+    description: "Schöne, intuitive Interfaces für Web, Apps und komplexe digitale Produkte.",
+    icon: "◈",
+    features: ["Interface Design", "Designsysteme", "User Research", "Prototyping"]
+  },
+  {
+    title: "Websites & Digitale Produkte",
+    description: "Hochperformante Websites und Plattformen, gebaut für Conversion und Langlebigkeit.",
+    icon: "▣",
+    features: ["Individuelle Websites", "Web-Apps", "E-Commerce", "CMS-Integration"]
+  },
+  {
+    title: "Kreative Kampagnen",
+    description: "Integrierte Kampagnen, die Storytelling, Digitales und physische Touchpoints verbinden.",
+    icon: "✧",
+    features: ["Kampagnenstrategie", "Kreative Leitung", "Content-Systeme", "Aktivierung"]
+  }
+];
+
+const featuredWork = [
+  {
+    title: "Vesper",
+    client: "Vesper Financial",
+    category: "Branding",
+    description: "Komplettes Rebranding und digitale Plattform für eine neue Generation europäischen Wealth Managements.",
+    image: "https://picsum.photos/id/1015/1200/800",
+    year: "2025"
+  },
+  {
+    title: "Lumen",
+    client: "Lumen Studio",
+    category: "Digital",
+    description: "Preisgekrönte Website und Designsystem für eine der führenden europäischen Architekturpraxen.",
+    image: "https://picsum.photos/id/1033/1200/800",
+    year: "2024"
+  },
+  {
+    title: "Aether",
+    client: "Aether Collective",
+    category: "Kampagne",
+    description: "Paneuropäische Nachhaltigkeitskampagne über Digital, Print und physische Erlebnisse.",
+    image: "https://picsum.photos/id/1005/1200/800",
+    year: "2024"
+  }
+];
+
+const whyItems = [
+  { key: 'why.1' },
+  { key: 'why.2' },
+  { key: 'why.3' },
+  { key: 'why.4' },
+];
+
+const testimonials = [
+  {
+    quote: "WebNova hat nicht nur unsere Marke neu gestaltet — sie haben uns geholfen zu verstehen, wer wir sind.",
+    name: "Clara Mendes",
+    role: "CEO, Vesper Financial"
+  },
+  {
+    quote: "Das Niveau an Handwerk und strategischem Denken ist selten. Sie wurden echte Partner.",
+    name: "Thomas Richter",
+    role: "Head of Digital, Lumen"
+  }
+];
+---
+
+<Layout title="WebNova — Premium Kreativagentur" description="WebNova ist eine Premium-Kreativagentur mit Sitz in Berlin. Wir entwickeln herausragende digitale Erlebnisse für ambitionierte Marken in ganz Europa.">
+  <!-- Hero -->
+  <section class="relative min-h-[92vh] flex items-center border-b border-zinc-800 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6 pt-12 pb-20">
+      <div class="max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-zinc-800 text-sm text-zinc-400 mb-6">
+          Berlin • Europa
+        </div>
+        
+        <h1 class="text-balance mb-6">
+          {t('hero.title')}
+        </h1>
+        
+        <p class="max-w-2xl text-2xl text-zinc-400 mb-10 tracking-[-0.3px]">
+          {t('hero.subtitle')}
+        </p>
+        
+        <div class="flex flex-wrap gap-4">
+          <Button href={getLocalizedPath('/work', lang)} variant="primary" size="lg">
+            {t('hero.cta.primary')}
+          </Button>
+          <Button href={getLocalizedPath('/about', lang)} variant="secondary" size="lg">
+            {t('hero.cta.secondary')}
+          </Button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-0 right-0 w-2/3 h-2/3 bg-gradient-to-tl from-[#3b82f6]/5 to-transparent pointer-events-none"></div>
+  </section>
+
+  <!-- Services Preview -->
+  <section class="section max-w-7xl mx-auto px-6">
+    <SectionHeader 
+      title={t('home.services.title')} 
+      subtitle={t('home.services.subtitle')}
+      align="left"
+    />
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map(service => (
+        <ServiceCard 
+          title={service.title} 
+          description={service.description}
+          icon={service.icon}
+          features={service.features}
+        />
+      ))}
+    </div>
+    
+    <div class="mt-10 text-center">
+      <Button href={getLocalizedPath('/services', lang)} variant="secondary">
+        {t('common.learnMore')} →
+      </Button>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section class="section max-w-7xl mx-auto px-6 border-t border-zinc-800">
+    <div class="flex items-end justify-between mb-10">
+      <SectionHeader 
+        title={t('home.work.title')} 
+        subtitle={t('home.work.subtitle')}
+        align="left"
+      />
+      <div class="hidden md:block">
+        <Button href={getLocalizedPath('/work', lang)} variant="ghost">
+          {t('common.viewAll')} →
+        </Button>
+      </div>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {featuredWork.map(project => (
+        <ProjectCard 
+          title={project.title}
+          client={project.client}
+          category={project.category}
+          description={project.description}
+          image={project.image}
+          year={project.year}
+          href={getLocalizedPath('/work', lang)}
+        />
+      ))}
+    </div>
+    
+    <div class="md:hidden mt-8">
+      <Button href={getLocalizedPath('/work', lang)} variant="secondary" class="w-full justify-center">
+        {t('common.viewAll')}
+      </Button>
+    </div>
+  </section>
+
+  <!-- Why WebNova -->
+  <section class="section bg-[#111113] border-y border-zinc-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <SectionHeader 
+        title={t('home.why.title')} 
+        subtitle={t('home.why.subtitle')}
+        align="left"
+      />
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {whyItems.map((item, index) => {
+          const title = t(`${item.key}.title` as any);
+          const desc = t(`${item.key}.desc` as any);
+          return (
+            <div class="p-8 border border-zinc-800 rounded-2xl bg-[#0a0a0b]">
+              <div class="text-[#3b82f6] text-4xl font-light mb-4 tracking-tighter">0{index + 1}</div>
+              <h3 class="font-semibold text-xl mb-3">{title}</h3>
+              <p class="text-zinc-400 text-[15px] leading-relaxed">{desc}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section max-w-5xl mx-auto px-6">
+    <SectionHeader 
+      title={t('home.testimonials.title')} 
+      align="center"
+    />
+    
+    <div class="grid md:grid-cols-2 gap-6">
+      {testimonials.map(testimonial => (
+        <div class="card p-9 rounded-2xl">
+          <div class="text-4xl text-[#3b82f6] mb-6">„</div>
+          <blockquote class="text-xl leading-tight mb-8 text-balance">
+            {testimonial.quote}
+          </blockquote>
+          <div>
+            <div class="font-medium">{testimonial.name}</div>
+            <div class="text-sm text-zinc-400">{testimonial.role}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="border-t border-zinc-800 py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-5xl font-semibold tracking-[-1.5px] mb-4">{t('home.cta.title')}</h2>
+      <p class="text-xl text-zinc-400 mb-10">{t('home.cta.subtitle')}</p>
+      
+      <Button href={getLocalizedPath('/contact', lang)} variant="primary" size="lg">
+        {t('nav.getInTouch')}
+      </Button>
+    </div>
+  </section>
+</Layout>

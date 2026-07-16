@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const projects = [
+  { id: 1, title: "Vesper", client: "Vesper Financial", category: "Branding", year: "2025", description: "Complete rebrand and digital platform for a new European wealth manager.", image: "https://picsum.photos/id/1015/1400/1000", tags: ["Branding", "Digital"] },
+  { id: 2, title: "Lumen", client: "Lumen Studio", category: "Digital", year: "2024", description: "Website and comprehensive design system for a leading architecture practice.", image: "https://picsum.photos/id/1033/1400/1000", tags: ["Digital", "Web & Product"] },
+  { id: 3, title: "Aether", client: "Aether Collective", category: "Campaign", year: "2024", description: "Pan-European sustainability campaign across multiple channels and touchpoints.", image: "https://picsum.photos/id/1005/1400/1000", tags: ["Campaigns", "Branding"] },
+  { id: 4, title: "Nexus", client: "Nexus Mobility", category: "Web & Product", year: "2025", description: "Digital platform and brand refresh for a sustainable mobility startup.", image: "https://picsum.photos/id/106/1400/1000", tags: ["Web & Product", "Digital"] },
+  { id: 5, title: "Forge", client: "Forge Capital", category: "Branding", year: "2023", description: "Bold new identity for a next-generation private equity firm.", image: "https://picsum.photos/id/160/1400/1000", tags: ["Branding"] },
+  { id: 6, title: "Arc", client: "Arc Collective", category: "Motion", year: "2024", description: "3D brand film and motion system for a creative technology studio.", image: "https://picsum.photos/id/201/1400/1000", tags: ["Motion", "Campaigns"] },
+  { id: 7, title: "Pulsar", client: "Pulsar Energy", category: "Digital", year: "2023", description: "Complex data visualization platform and website for the energy transition.", image: "https://picsum.photos/id/251/1400/1000", tags: ["Digital", "Web & Product"] },
+  { id: 8, title: "Haven", client: "Haven Hotels", category: "Campaign", year: "2025", description: "Integrated brand campaign and digital experience for a boutique hotel group.", image: "https://picsum.photos/id/29/1400/1000", tags: ["Campaigns", "Branding"] },
+];
+
+const categories = ['All', 'Branding', 'Digital', 'Campaigns', 'Motion', 'Web & Product'];
+---
+
+<Layout title="Work" description="Selected projects by WebNova — premium creative work across branding, digital experiences, campaigns and motion.">
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-20">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      <div>
+        <h1 class="text-6xl font-semibold tracking-[-1.8px]">{t('work.title')}</h1>
+        <p class="text-2xl text-zinc-400 mt-2">{t('work.subtitle')}</p>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-2 mb-10" id="filters">
+      {categories.map((cat, index) => (
+        <button 
+          data-category={cat === 'All' ? 'all' : cat}
+          class:list={[
+            "filter-btn",
+            { "active": index === 0 }
+          ]}
+        >
+          {cat === 'All' ? t('work.filter.all') : 
+           cat === 'Branding' ? t('work.filter.branding') : 
+           cat === 'Digital' ? t('work.filter.digital') :
+           cat === 'Campaigns' ? t('work.filter.campaign') :
+           cat === 'Motion' ? t('work.filter.motion') : t('work.filter.web')}
+        </button>
+      ))}
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+      {projects.map(project => (
+        <div class="project-card group" data-category={project.category} data-tags={project.tags.join(',')}>
+          <a href={getLocalizedPath('/work', lang)} class="block">
+            <div class="overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800">
+              <div class="aspect-[16/10] relative overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  class="project-image w-full h-full object-cover transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/10 to-black/60"></div>
+                <div class="absolute top-4 left-4 px-3 py-1 text-xs rounded-full bg-black/60 backdrop-blur border border-white/10">
+                  {project.category}
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <h3 class="font-semibold text-2xl tracking-tight group-hover:text-[#3b82f6] transition-colors">{project.title}</h3>
+                    <p class="text-sm text-zinc-400 mt-0.5">{project.client} • {project.year}</p>
+                  </div>
+                </div>
+                <p class="mt-4 text-sm text-zinc-400 line-clamp-3 pr-4">{project.description}</p>
+                
+                <div class="mt-6 inline-flex items-center text-sm font-medium text-[#3b82f6]">
+                  {t('work.viewCase')} <span class="ml-1.5 group-hover:ml-2 transition-all">→</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-center text-sm text-zinc-500 mt-12">More projects available upon request. We selectively choose work that aligns with our values.</p>
+  </div>
+
+  <script>
+    // Portfolio filter functionality (vanilla JS, minimal)
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = document.querySelectorAll('#filters button');
+      const cards = document.querySelectorAll('#portfolio-grid .project-card');
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-category');
+
+          cards.forEach(card => {
+            const cardCat = card.getAttribute('data-category');
+            const tags = card.getAttribute('data-tags') || '';
+            
+            if (filter === 'all' || cardCat === filter || tags.includes(filter || '')) {
+              (card as HTMLElement).style.display = '';
+            } else {
+              (card as HTMLElement).style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,41 @@
+---
+export interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { 
+  href, 
+  variant = 'primary', 
+  size = 'md',
+  class: className = '' 
+} = Astro.props;
+
+const base = "btn inline-flex items-center justify-center font-medium rounded-full transition-all active:scale-[0.985]";
+
+const variants = {
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  ghost: "btn-ghost"
+};
+
+const sizes = {
+  sm: "px-4 py-1.5 text-sm",
+  md: "px-6 py-2.5 text-[15px]",
+  lg: "px-8 py-3.5 text-base"
+};
+
+const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    <slot />
+  </a>
+) : (
+  <button type="button" class={classes}>
+    <slot />
+  </button>
+)}

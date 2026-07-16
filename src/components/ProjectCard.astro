@@ -1,0 +1,45 @@
+---
+export interface Props {
+  title: string;
+  client: string;
+  category: string;
+  description: string;
+  image: string;
+  href?: string;
+  year?: string;
+}
+
+const { title, client, category, description, image, href = '#', year } = Astro.props;
+---
+
+<a href={href} class="group block">
+  <div class="overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800">
+    <div class="aspect-[16/10] relative overflow-hidden bg-zinc-950">
+      <img 
+        src={image} 
+        alt={`${title} — ${client}`}
+        class="project-image w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/70"></div>
+      
+      <div class="absolute top-4 right-4 px-3 py-1 bg-black/70 text-xs rounded-full border border-white/10 text-white/90">
+        {category}
+      </div>
+    </div>
+    
+    <div class="p-6">
+      <div class="flex items-baseline justify-between mb-1">
+        <h3 class="font-semibold text-xl tracking-tight group-hover:text-[#3b82f6] transition-colors">{title}</h3>
+        {year && <span class="text-xs text-zinc-500">{year}</span>}
+      </div>
+      <p class="text-sm text-zinc-400 mb-3">{client}</p>
+      <p class="text-sm text-zinc-400 line-clamp-2">{description}</p>
+      
+      <div class="mt-5 text-sm font-medium text-[#3b82f6] flex items-center gap-1.5 group-hover:gap-2 transition-all">
+        View project 
+        <span class="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+      </div>
+    </div>
+  </div>
+</a>
